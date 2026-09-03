@@ -1,0 +1,15 @@
+{
+  "valid": {
+    "name": "Tabata Medeiros Silva",
+    "email": "tabatamedeiros123@gmail.com",
+    "password": "Tm1357"
+  },
+  "invalidPassword": {
+    "email": "ola",
+    "password": "senhaErrada"
+  },
+  "invalidEmail": {
+    "email": "usuarioInexistente",
+    "password": "123"
+  }
+}
