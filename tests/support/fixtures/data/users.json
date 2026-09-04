@@ -5,11 +5,9 @@
     "password": "Tm1357"
   },
   "invalidPassword": {
-    "email": "ola",
     "password": "senhaErrada"
   },
   "invalidEmail": {
-    "email": "usuarioInexistente",
-    "password": "123"
+    "email": "usuarioInexistente"
   }
 }
