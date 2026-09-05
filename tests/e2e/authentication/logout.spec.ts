@@ -1,4 +1,4 @@
-import { test, users, Login } from '../support';
+import { test, users, Login } from '../../support';
 
 let login: Login;
 

@@ -5,5 +5,5 @@ export const test = popupHandlerTest;
 
 export { expect } from '@playwright/test';
 export { users };
-export * from './errorHandler.fixture';
-export * from './alertHandler.fixture';
+export { ErrorHandler } from './errorHandler.fixture';
+export { AlertHandler } from './alertHandler.fixture';

@@ -1,4 +1,4 @@
-import { test, users, Login, ErrorHandler, AlertHandler } from '../support';
+import { test, users, Login, ErrorHandler, AlertHandler } from '../../support';
 
 let login: Login;
 

@@ -18,13 +18,21 @@ export class Login {
 
     }
 
-    async IsLoggedIn(){
+    async IsLoggedIn() {
         await expect(this.page.getByText(users.valid.name)).toBeVisible({ timeout: 10_000 });
     }
 
     async Logout() {
-        await this.page.locator('button[aria-haspopup="true"]').click();
-        await this.page.getByRole('menuitem', { name: 'Sair' }).click();
+        const header = this.page.getByRole('banner');
+
+        const userMenuButton = header
+            .locator('button.MuiIconButton-root.MuiIconButton-sizeMedium')
+            .last();
+
+        await userMenuButton.click();
+        await this.page.locator('li[role="menuitem"][tipo="sair"]').click();
         await expect(this.page).toHaveURL('/');
     }
+
+
 }

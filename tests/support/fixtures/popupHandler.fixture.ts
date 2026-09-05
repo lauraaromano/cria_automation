@@ -6,12 +6,14 @@ export const test = base.extend({
     const acceptAllButton = page.getByRole('button', { name: /Aceitar todos/i });
     await page.addLocatorHandler(acceptAllButton, async () => {
       await acceptAllButton.click();
+      await page.waitForLoadState('networkidle').catch(() => {});
     });
 
     // Popup de moedas que vão expirar
     const useLaterButton = page.getByRole('button', { name: /Usar depois/i });
     await page.addLocatorHandler(useLaterButton, async () => {
       await useLaterButton.click();
+      await expect(useLaterButton).toBeHidden({ timeout: 5000 }).catch(() => {});
     });
 
     await use(page);
