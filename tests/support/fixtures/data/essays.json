@@ -1,7 +1,48 @@
 {
+  "vestibulares": [
+    "Enem",
+    "Unicamp",
+    "Fuvest",
+    "UNESP",
+    "UNB",
+    "UERJ",
+    "UECE",
+    "FATEC",
+    "UEG",
+    "UNIVESP",
+    "UNIFESP",
+    "ITA",
+    "FAMEMA",
+    "UFSC",
+    "UNEB",
+    "UDESC",
+    "FMJ",
+    "Fundação Carlos Chagas - Concurso",
+    "Provão Paulista",
+    "Fundação Getúlio Vargas - concurso"
+  ],
+  "areas": [
+    "Cultura",
+    "Economia",
+    "Educação",
+    "Lazer",
+    "Meio Ambiente",
+    "Politica",
+    "Preconceito",
+    "Religião",
+    "Resenha",
+    "Saúde",
+    "Segurança",
+    "Social",
+    "Tecnologia",
+    "Trabalho",
+    "Violência",
+    "Outros",
+    "FMJ"
+  ],
+  
   "rascunhos": {
     "rascunho01": {
-      "vestibular": "ENEM",
       "area": "Educação",
       "tema": "O impacto da cultura da violência na educação brasileira",
       "tipoTexto": "Dissertativo",
@@ -9,9 +50,7 @@
       "titulo": "A violência dentro e fora da escola",
       "redacao": "A cultura da violência representa um obstáculo para a construção de um ambiente educacional seguro e favorável à aprendizagem no Brasil. Dentro e fora das escolas, estudantes podem entrar em contato com situações de agressividade, conflitos e intolerância, fatores que interferem diretamente na convivência escolar. Além disso, a exposição frequente a comportamentos violentos pode contribuir para a naturalização dessas práticas entre crianças e adolescentes. Nesse contexto, a escola possui papel fundamental na formação de cidadãos capazes de resolver conflitos por meio do diálogo e do respeito. Para enfrentar esse problema, é necessário que o poder público amplie programas de prevenção à violência nas instituições de ensino, oferecendo acompanhamento especializado e capacitação aos profissionais da educação. Paralelamente, as escolas devem desenvolver projetos que promovam a cultura de paz, a empatia e a resolução não violenta de conflitos. Dessa forma, será possível construir ambientes escolares mais seguros e contribuir para uma sociedade menos tolerante à violência."
     },
-
     "rascunho02": {
-      "vestibular": "FUVEST",
       "area": "Social",
       "tema": "As diferentes faces do riso",
       "tipoTexto": "Narrativo",
@@ -19,7 +58,6 @@
       "titulo": "Quando o riso muda de lado",
       "redacao": "Naquela manhã, o ônibus estava mais silencioso do que de costume. Até que um homem entrou carregando uma sacola enorme, tropeçou no primeiro degrau e quase deixou tudo cair. Algumas pessoas riram imediatamente. Ele também riu, ajeitou a sacola e seguiu para o fundo do ônibus. Poucos minutos depois, uma criança começou a imitar o jeito apressado do homem caminhar, arrancando novas risadas dos passageiros. A mãe, porém, pediu que ela parasse. Disse que rir junto com alguém era diferente de rir de alguém. O comentário fez o ônibus ficar quieto novamente. O homem olhou para trás e sorriu discretamente. Naquele instante, percebi que o riso podia aproximar pessoas, aliviar situações constrangedoras e transformar momentos difíceis, mas também poderia machucar quando usado para diminuir outra pessoa. Talvez essa fosse a face mais curiosa do riso: ele nunca dependia apenas da graça, mas também da maneira como escolhemos enxergar o outro."
     },
-
     "rascunho03": {
       "vestibular": "UNESP",
       "area": "Saúde",
@@ -29,7 +67,6 @@
       "titulo": "O dia em que a escola mudou",
       "redacao": "Durante o período em que estudei em uma escola pública, presenciei diferentes situações relacionadas à violência entre estudantes. Em determinado momento, os conflitos se tornaram tão frequentes que muitos alunos passaram a evitar determinados espaços durante os intervalos. Professores também perceberam que a tensão estava prejudicando as aulas e dificultando a convivência entre as turmas. Depois de algumas reuniões, a direção decidiu organizar atividades voltadas ao diálogo e à resolução de conflitos. Participamos de rodas de conversa, oficinas e projetos coletivos nos quais pudemos falar sobre situações que normalmente ficavam escondidas. No começo, alguns estudantes não acreditavam que aquelas ações fariam diferença. Com o passar das semanas, porém, o ambiente começou a mudar. Os conflitos não desapareceram completamente, mas percebemos que conversar sobre os problemas era melhor do que simplesmente ignorá-los. Essa experiência me mostrou que combater a violência na escola exige participação de toda a comunidade escolar."
     },
-
     "rascunho04": {
       "vestibular": "FATEC",
       "area": "Educação",
@@ -40,7 +77,6 @@
       "redacao": "Clara costumava passar as tardes desenhando em um caderno antigo que havia ganhado da professora. Em seus desenhos, sempre apareciam casas, árvores e pessoas brincando juntas. Certo dia, durante uma atividade na escola, a professora pediu que cada criança desenhasse um lugar onde se sentisse segura. Clara desenhou a própria sala de aula. Quando perguntaram o motivo, ela respondeu que ali conseguia conversar e pedir ajuda quando alguma coisa a preocupava. A professora percebeu que a resposta dizia mais do que parecia e decidiu conversar com a turma sobre proteção, respeito e a importância de procurar adultos responsáveis diante de situações de violência. A atividade também aproximou a escola das famílias e mostrou que proteger crianças exige atenção constante. Clara continuou desenhando, mas passou a representar em seus desenhos personagens ajudando uns aos outros. Para ela, segurança passou a significar saber que sempre existiria alguém disposto a ouvir."
     }
   },
-
   "redacoesNormais": {
     "redacao01": {
       "vestibular": "ENEM",
@@ -51,7 +87,6 @@
       "titulo": "Memória, verdade e justiça no Brasil",
       "redacao": "A construção da memória coletiva é fundamental para que uma sociedade compreenda sua própria história e enfrente problemas que permanecem presentes no cotidiano. No Brasil, entretanto, determinados acontecimentos históricos ainda são pouco conhecidos por parte da população, enquanto diferentes grupos lutam pelo reconhecimento de suas experiências. Essa dificuldade pode contribuir para o esquecimento de violações e para a repetição de práticas de injustiça. Nesse contexto, a busca por memória, verdade e justiça não deve ser compreendida apenas como uma questão relacionada ao passado, mas como uma necessidade do presente. Para enfrentar esse desafio, instituições públicas, escolas, universidades e espaços culturais devem ampliar iniciativas de preservação histórica e educação para a memória. Além disso, é necessário garantir que diferentes grupos sociais tenham suas experiências registradas e reconhecidas. Dessa maneira, o conhecimento histórico poderá contribuir para a formação de uma sociedade mais consciente de seu passado e mais preparada para evitar a repetição de injustiças."
     },
-
     "redacao02": {
       "vestibular": "ENEM",
       "area": "Saúde",
@@ -61,9 +96,7 @@
       "titulo": "Talento não basta quando faltam oportunidades",
       "redacao": "É comum afirmar que pessoas talentosas conseguem alcançar seus objetivos apenas por meio de esforço e dedicação. Entretanto, essa ideia ignora que as oportunidades disponíveis não são distribuídas igualmente entre todos. Um jovem pode possuir grande capacidade para determinada atividade, mas encontrar dificuldades para desenvolvê-la por não ter acesso a cursos, equipamentos, orientação ou condições adequadas de estudo e trabalho. Essa realidade demonstra que talento e oportunidade estão diretamente relacionados. Na minha perspectiva, valorizar o mérito individual é importante, mas não significa ignorar as desigualdades existentes. Para que mais pessoas tenham condições de desenvolver suas habilidades, é necessário ampliar políticas públicas de acesso à educação, à cultura, ao esporte e à formação profissional. Também é importante incentivar projetos que aproximem jovens de diferentes realidades de oportunidades de desenvolvimento. Dessa maneira, o talento poderá deixar de depender exclusivamente das condições econômicas e sociais de cada indivíduo, permitindo que mais pessoas tenham a possibilidade de transformar suas capacidades em conquistas concretas."
     },
-
     "redacao03": {
-      "vestibular": "ENEM",
       "area": "Educação",
       "tema": "Caminhos para combater a violência homofóbica e promover a inclusão de pessoas LBTGQIA+",
       "tipoTexto": "Dissertativo",
@@ -71,9 +104,7 @@
       "titulo": "Educação e respeito contra a violência homofóbica",
       "redacao": "A violência homofóbica e outras formas de discriminação podem afetar profundamente a convivência social e o acesso de diferentes grupos a espaços de educação, trabalho e participação cidadã. No ambiente escolar, situações de preconceito podem comprometer a sensação de segurança e pertencimento dos estudantes, além de dificultar uma convivência baseada no respeito às diferenças. Nesse cenário, a educação apresenta papel relevante na construção de relações sociais mais inclusivas. A escola pode contribuir para esse processo ao promover discussões sobre diversidade, respeito e direitos, sempre de maneira adequada ao contexto educacional. Além disso, profissionais da educação precisam estar preparados para identificar situações de discriminação e encaminhá-las de maneira responsável. Campanhas de conscientização e projetos de convivência também podem ajudar a combater estereótipos e atitudes preconceituosas. Portanto, a combinação entre educação, prevenção e mecanismos de proteção pode contribuir para reduzir manifestações de violência homofóbica e promover ambientes sociais mais seguros e inclusivos."
     },
-
     "redacao04": {
-      "vestibular": "FUVEST",
       "area": "Social",
       "tema": "Talento e oportunidades: todos têm as mesmas chances de alcançar seus objetivos?",
       "tipoTexto": "Narrativo",
@@ -81,9 +112,7 @@
       "titulo": "Projeto amplia oportunidades para jovens talentos",
       "redacao": "Um projeto comunitário criado por moradores de uma região periférica começou a oferecer oficinas gratuitas para jovens interessados em desenvolver diferentes habilidades. A iniciativa reúne atividades relacionadas à música, tecnologia, esporte e produção cultural e busca atender estudantes que possuem poucas oportunidades de acesso a cursos especializados. Segundo os organizadores, a ideia surgiu depois que moradores perceberam que diversos jovens apresentavam talento, mas não tinham recursos para investir em sua formação. As atividades são realizadas em espaços cedidos pela comunidade e contam com a participação voluntária de profissionais. Além das oficinas, o projeto pretende promover encontros com pessoas que atuam nas áreas trabalhadas, permitindo que os participantes conheçam diferentes possibilidades profissionais. A expectativa dos responsáveis é ampliar o número de vagas nos próximos meses. Para os moradores envolvidos, a iniciativa demonstra que criar oportunidades pode ser fundamental para que talentos existentes na comunidade tenham condições de se desenvolver."
     },
-
     "redacao05": {
-      "vestibular": "UNESP",
       "area": "Saúde",
       "tema": "Medicalização da vida: a quem interessa?",
       "tipoTexto": "Narrativo",
@@ -91,9 +120,7 @@
       "titulo": "Para tudo existe um remédio?",
       "redacao": "Na sala de espera, havia pessoas olhando para o relógio, mexendo no celular ou simplesmente esperando a consulta terminar. Uma senhora ao meu lado comentava que estava cansada havia alguns dias e que talvez precisasse de algum medicamento para voltar à rotina. Antes mesmo de conversar com um profissional, já havia recebido várias sugestões de conhecidos. Outra pessoa contou uma história parecida e, em poucos minutos, a sala inteira parecia conhecer uma solução para cada problema. Fiquei pensando em como nos acostumamos a procurar respostas rápidas para situações que nem sempre possuem uma solução simples. Cansaço, tristeza, preocupação e dificuldades do cotidiano passaram a ser tratados como problemas que precisariam desaparecer imediatamente. A conversa terminou quando uma enfermeira chamou a próxima pessoa. Saí dali pensando que medicamentos podem ter um papel importante quando indicados por profissionais, mas que transformar qualquer desconforto em algo que precisa ser medicado também merece reflexão. Afinal, talvez nem tudo na vida precise de uma receita."
     },
-
     "redacao06": {
-      "vestibular": "FATEC",
       "area": "Social",
       "tema": "Como combater a insegurança alimentar no Brasil?",
       "tipoTexto": "Narrativo",
@@ -103,4 +130,3 @@
     }
   }
 }
-```
