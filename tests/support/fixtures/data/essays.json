@@ -40,6 +40,26 @@
     "Outros",
     "FMJ"
   ],
+  "tipo_texto": [
+    " Dissertativo",
+    " Narrativo"
+  ],
+  "genero_textual": {
+    "dissertativo":[
+      "Dissertação Argumentativa (ENEM)",
+      "Resenha Crítica",
+      "Editorial",
+      "Carta Aberta",
+      "Artigo de Opinião",
+      "Dissertação Expositiva"
+    ],
+    "narrativo":[
+      "Crônica",
+      "Relato",
+      "Notícia",
+      "Conto"
+    ]
+  },
   
   "rascunhos": {
     "rascunho01": {

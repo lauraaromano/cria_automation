@@ -12,22 +12,19 @@ test('deve realizar login com credenciais válidas', async () => {
 });
 
 test('não deve realizar login com os campos de email e senha vazios', async ({ page }) => {
-
     await login.login('', '');
     await ErrorHandler.expectFieldError(page, 'E-mail ou CPF:', 'Obrigatório');
     await ErrorHandler.expectFieldError(page, 'Senha', 'Obrigatório');
 });
 
 test('não deve realizar login com email válido e senha inválida', async ({ page }) => {
-
     await login.login(users.valid.email, users.invalidPassword.password);
     await AlertHandler.expectAlertMessage(page, 'Senha inválida!');
 });
 
 test('não deve realizar login com usuário inválido e senha válida', async ({ page }) => {
-    await login.login(users.valid.password, users.invalidEmail.email);
+    await login.login(users.invalidEmail.email, users.valid.password);
     await AlertHandler.expectAlertMessage(page, 'Usuário não encontrado!');
-
 });
 
 test('não deve realizar login quando o campo de usuário estiver vazio', async ({ page }) => {
@@ -38,5 +35,4 @@ test('não deve realizar login quando o campo de usuário estiver vazio', async 
 test('não deve realizar login quando o campo de senha estiver vazio', async ({ page }) => {
     await login.login(users.valid.email, '');
     await ErrorHandler.expectFieldError(page, 'Senha', 'Obrigatório');
-
 });

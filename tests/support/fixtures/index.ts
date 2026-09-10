@@ -1,7 +1,6 @@
 import { test as popupHandlerTest } from './popupHandler.fixture';
-import users from './data/users.json';
+import { users } from './data/users';
 import essays from './data/essays.json';
-
 
 export const test = popupHandlerTest;
 

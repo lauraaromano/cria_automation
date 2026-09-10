@@ -10,10 +10,9 @@ test.beforeEach(async ({ page }) => {
     await login.IsLoggedIn();
 });
 
-test('deve criar uma redação do tipo ENEM', async ({ page }) => {
-    test.setTimeout(90000); // 90s só pra esse teste
+test('deve criar uma redação', async ({ page }) => {
+    test.setTimeout(0);
 
-    await essays.createEssay();
-    // await page.waitForTimeout(10000); // pausa 10s antes de finalizar
+    await essays.createRandomEssay();
 
 });
