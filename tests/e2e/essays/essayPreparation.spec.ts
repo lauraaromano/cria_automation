@@ -8,15 +8,24 @@ test.beforeEach(async ({ page }) => {
     essays = new Essays(page);
     await login.login(users.valid.email, users.valid.password);
     await login.IsLoggedIn();
+    await essays.clickCreateEssay();
+
     test.setTimeout(0);
 
+});
+
+test('teste', async () => {
+    await essays.selectSearchByKeyword();
+    await essays.selectTipoTexto("Narrativo");
+    // await essays.selectGeneroTextual("Relato")
+    // await essays.clickStartNewEssay();
 });
 
 test('deve criar uma redação aleatória com sucesso', async () => {
     await essays.createRandomEssay();
 });
 
-test('deve criar uam redação estilo Enem com sucesso', async () => {
+test('deve criar uma redação estilo Enem com sucesso', async () => {
 
 });
 
