@@ -17,11 +17,18 @@ export class Essays {
     }
 
     async randomTipoTexto(): Promise<string> {
+        // Abre a seção de tipo de texto antes de escolher — etapa que faltava
+        const tipoTextoSection = this.page.getByText(' Selecione o tipo de texto ', { exact: true });
+        await tipoTextoSection.waitFor({ state: 'visible', timeout: 10000 });
+        await tipoTextoSection.click();
+
         const tipo_texto = essays.tipo_texto;
         const randomIndex = Math.floor(Math.random() * tipo_texto.length);
         const tipoTextoEscolhido = tipo_texto[randomIndex];
 
-        await this.page.getByText(tipoTextoEscolhido, { exact: true }).click();
+        const option = this.page.getByText(tipoTextoEscolhido, { exact: true });
+        await option.waitFor({ state: 'visible', timeout: 10000 });
+        await option.click();
 
         return tipoTextoEscolhido;
     }
@@ -85,12 +92,30 @@ export class Essays {
         await temas.nth(randomIndex).click();
     }
 
+    async selectWeekTheme() {
+        const label = this.page.getByText('Tema da semana', { exact: true });
+        const labelWrapper = label.locator('xpath=..');
+        const themeParagraph = labelWrapper.locator('xpath=following-sibling::p[1]');
+
+        await themeParagraph.waitFor({ state: 'visible', timeout: 10000 });
+
+        await expect(themeParagraph).not.toHaveText('', { timeout: 10000 });
+
+        await themeParagraph.click();
+    }
+
     //AÇÕES
     async createRandomEssay() {
         await this.page.getByRole('button', { name: 'Criar redação   ' }).click();
-        await this.page.getByText('Busca por vestibular').click();
+
+        const vestibularField = this.page.getByText('Busca por vestibular');
+        await vestibularField.waitFor({ state: 'visible', timeout: 10000 });
+        await vestibularField.click();
         await this.selectRandomVestibular();
-        await this.page.getByText('Busca por área').click();
+
+        const areaField = this.page.getByText('Busca por área');
+        await areaField.waitFor({ state: 'visible', timeout: 10000 });
+        await areaField.click();
         await this.selectRandomArea();
 
         await this.goToRandomThemePageAndSelect();
@@ -104,10 +129,12 @@ export class Essays {
             await this.goToRandomThemePageAndSelect();
         }
 
-        await this.page.getByText(' Selecione o tipo de texto ').click();
+        // randomTipoTexto() já abre a seção "Selecione o tipo de texto" internamente
         const tipoEscolhido = await this.randomTipoTexto();
 
-        await this.page.getByText('  Gênero Textual ').click();
+        const generoField = this.page.getByText('  Gênero Textual ');
+        await generoField.waitFor({ state: 'visible', timeout: 10000 });
+        await generoField.click();
 
         if (tipoEscolhido === " Dissertativo") {
             await this.selectRandomGeneroDissertativo();
@@ -115,18 +142,7 @@ export class Essays {
             await this.selectRandomGeneroNarrativo();
         }
 
-        await this.page.getByRole('button', {name: 'Começar nova redação'} ).click();
+        await this.page.getByRole('button', { name: 'Começar nova redação' }).click();
     }
 
-    async createEnemEssay() {
-        await this.page.getByRole('button', { name: 'Criar redação   ' }).click();
-        await this.page.getByText('Busca por vestibular').click();
-        await this.page.getByText('Enem').click();
-        await this.selectRandomArea();
-    
-    }
-
-    async createEssayWithRandomTheme() {
-        await this.goToRandomThemePageAndSelect();
-    }
 }
