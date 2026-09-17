@@ -123,7 +123,6 @@ export class Essays {
     }
 
     async goToRandomThemePageAndSelect() {
-        // Pega os números de página visíveis e descobre o total de páginas
         const numerosPagina = this.page.locator('.MuiPagination-ul li').filter({ hasText: /^\d+$/ });
         await numerosPagina.first().waitFor({ state: 'visible', timeout: 15000 });
 
@@ -174,7 +173,7 @@ export class Essays {
         const naoEncontrou = await semTemas.isVisible({ timeout: 3000 }).catch(() => false);
 
         if (naoEncontrou) {
-            return null; // tema não existe na busca — chamador decide o que fazer
+            return null; 
         }
 
         const opcao = this.page.locator('[role="option"]', { hasText: temaEscolhido });
@@ -186,40 +185,6 @@ export class Essays {
     }
 
     //AÇÕES
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     async createRandomEssay() {
@@ -245,7 +210,6 @@ export class Essays {
             await this.goToRandomThemePageAndSelect();
         }
 
-        // randomTipoTexto() já abre a seção "Selecione o tipo de texto" internamente
         const tipoEscolhido = await this.randomTipoTexto();
 
         const generoField = this.page.getByText('  Gênero Textual ');

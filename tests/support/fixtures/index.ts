@@ -1,11 +1,11 @@
-import { test as popupHandlerTest } from './popupHandler.fixture';
+import { test } from './testWithRetry.fixture';
 import { users } from './data/users';
-import essays from './data/essays.json';
+import essaysData from './data/essays.json';
 
-export const test = popupHandlerTest;
+export { test };
 
 export { expect } from '@playwright/test';
 export { users };
-export { essays };
+export const essays = essaysData;
 export { ErrorHandler } from './errorHandler.fixture';
 export { AlertHandler } from './alertHandler.fixture';

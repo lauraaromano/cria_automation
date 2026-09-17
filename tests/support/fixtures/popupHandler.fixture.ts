@@ -1,27 +1,48 @@
-// tests/support/fixtures/popupHandler.fixture.ts
-import { test as base, expect } from '@playwright/test';
+import { test as base, expect, type Page, type Locator } from '@playwright/test';
 
-export const test = base.extend({
+type PopupRule = {
+  name: string;
+  locator: (page: Page) => Locator;
+};
 
+export const POPUP_RULES: PopupRule[] = [
+  {
+    name: 'Cookies - Aceitar todos',
+    locator: (page) => page.getByRole('button', { name: /aceitar todos/i }),
+  },
+  {
+    name: 'Usar depois',
+    locator: (page) => page.getByRole('button', { name: /usar depois/i }),
+  },
+];
+
+export const test = base.extend<{ popupHandler: void }>({
   page: async ({ page }, use) => {
-    page.on('load', () => {
-      console.log('>>> PÁGINA RECARREGOU - URL:', page.url());
+    page.on('load', () => console.log('>>> PÁGINA CARREGOU:', page.url()));
+    page.on('dialog', async (dialog) => {
+      console.log(`[popupHandler] dialog nativo: ${dialog.message()}`);
+      await dialog.accept().catch(() => {});
     });
-
-    const acceptAllButton = page.getByRole('button', { name: /Aceitar todos/i });
-    await page.addLocatorHandler(acceptAllButton, async () => {
-      await acceptAllButton.click();
-      await page.waitForLoadState('networkidle').catch(() => {});
-    });
-
-    const useLaterButton = page.getByRole('button', { name: /Usar depois/i });
-    await page.addLocatorHandler(useLaterButton, async () => {
-      await useLaterButton.click();
-      await expect(useLaterButton).toBeHidden({ timeout: 5000 }).catch(() => {});
-    });
-
     await use(page);
   },
+
+  popupHandler: [
+    async ({ page }, use) => {
+      for (const rule of POPUP_RULES) {
+        const locator = rule.locator(page).first();
+        await page.addLocatorHandler(
+          locator,
+          async () => {
+            await locator.click({ timeout: 3000, noWaitAfter: true }).catch(() => {});
+            console.log(`[popupHandler] fechado: ${rule.name}`);
+          },
+          { noWaitAfter: true },
+        );
+      }
+      await use();
+    },
+    { auto: true },
+  ],
 });
 
 export { expect };
