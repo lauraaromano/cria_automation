@@ -1,53 +1,43 @@
+// tests/e2e/debug-theme.spec.ts
 import { test, users, Essays, Login } from '../../support';
 
 test.setTimeout(0);
 
-let login: Login;
-let essays: Essays;
+test('dump da área de Resultado', async ({ page }) => {
+  const login = new Login(page);
+  const essays = new Essays(page);
 
-test.beforeEach(async ({ page }) => {
-    login = new Login(page);
-    essays = new Essays(page);
-    await login.login(users.valid.email, users.valid.password);
-    await login.IsLoggedIn();
-    await essays.clickCreateEssay();
+  await login.login(users.valid.email, users.valid.password);
+  await login.IsLoggedIn();
+  await essays.clickCreateEssay();
 
-});
-test('dump do banner de cookies', async ({ page }) => {
-  await page.goto('/'); // ajuste se precisar de URL completa
-  await page.waitForTimeout(10000); // tempo pro banner subir
+  await essays.selectVestibular('Enem'); // ajuste o valor conforme seu método real
+  await essays.selectRandomArea();
 
+  await page.waitForTimeout(3000);
 
-  // 1) Existe iframe na página?
-  console.log('--- FRAMES ---');
-  for (const f of page.frames()) {
-    console.log(`frame: name="${f.name()}" url="${f.url()}"`);
+  const resultTitle = page.getByText('Resultado', { exact: true });
+  console.log('Resultado title count:', await resultTitle.count());
+
+  const allDivsWithResultado = page.locator('div', { hasText: 'Resultado' });
+  console.log('divs contendo "Resultado":', await allDivsWithResultado.count());
+
+  const themeText = 'O estigma associado às doenças mentais na sociedade brasileira';
+  const byText = page.getByText(themeText);
+  console.log('getByText(tema) count:', await byText.count());
+
+  const allP = page.locator('p');
+  console.log('total de <p> na página:', await allP.count());
+
+  const pWithTheme = page.locator('p').filter({ hasText: 'estigma associado' });
+  console.log('p filtrado por "estigma associado":', await pWithTheme.count());
+
+  if (await pWithTheme.count() > 0) {
+    const box = await pWithTheme.first().boundingBox();
+    console.log('bounding box do <p> encontrado:', box);
+    const isVisible = await pWithTheme.first().isVisible();
+    console.log('está visível?', isVisible);
   }
 
-  // 2) Todos os elementos clicáveis visíveis e seus textos
-  console.log('--- CLICÁVEIS VISÍVEIS ---');
-  const dump = await page.evaluate(() => {
-    const out: string[] = [];
-    document
-      .querySelectorAll('button, a, [role="button"], input[type="button"], input[type="submit"]')
-      .forEach((el) => {
-        const r = el.getBoundingClientRect();
-        if (r.width === 0 || r.height === 0) return;
-        out.push(
-          `<${el.tagName.toLowerCase()}> text="${(el.textContent || '').trim().slice(0, 60)}" ` +
-          `id="${el.id}" class="${(el.className || '').toString().slice(0, 60)}" ` +
-          `aria-label="${el.getAttribute('aria-label') ?? ''}"`,
-        );
-      });
-    return out;
-  });
-  dump.forEach((l) => console.log(l));
-
-  // 3) Existe shadow DOM fechado? (Playwright não enxerga esses)
-  const shadowHosts = await page.evaluate(() =>
-    [...document.querySelectorAll('*')]
-      .filter((el) => (el as any).shadowRoot)
-      .map((el) => el.tagName.toLowerCase()),
-  );
-  console.log('--- SHADOW HOSTS ---', shadowHosts);
+  await page.screenshot({ path: 'debug-theme-screenshot.png', fullPage: true });
 });
