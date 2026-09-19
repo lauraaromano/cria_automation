@@ -1,6 +1,10 @@
 import { Page, expect } from "@playwright/test"
 import { essays } from "../fixtures";
 
+async function skipIfAlreadyDone(page: Page, doneMarkerText: string, exact = true): Promise<boolean> {
+    return await page.getByText(doneMarkerText, { exact }).isVisible({ timeout: 1000 }).catch(() => false);
+}
+
 export class Essays {
     page: Page
 
@@ -20,25 +24,18 @@ export class Essays {
             .click();
     }
 
-    async selectRandomVestibular() {
-        const vestibulares = essays.vestibulares;
-        const randomIndex = Math.floor(Math.random() * vestibulares.length);
-        const vestibularEscolhido = vestibulares[randomIndex];
-
-        await this.page.getByText(vestibularEscolhido, { exact: true }).click();
-    }
-
     async selectVestibular(vestibularEscolhido: string) {
 
-        const temaEscolhidoLabel = this.page.getByText('Tema Escolhido', { exact: true });
-        const jaAvancou = await temaEscolhidoLabel.isVisible({ timeout: 1000 }).catch(() => false);
-        if (jaAvancou) return;
+        if (await skipIfAlreadyDone(this.page, 'Tema Escolhido')) return;
 
-        const vestibularField = this.page.getByText('Busca por vestibular');
+        // .first() resolve strict mode violation: quando o dropdown já está
+        // aberto (ex: retry anterior), o texto "Busca por vestibular" aparece
+        // duplicado (no campo fechado + na opção ativa da lista)
+        const vestibularField = this.page.getByText('Busca por vestibular').first();
         await vestibularField.waitFor({ state: 'visible', timeout: 10000 });
         await vestibularField.click();
 
-        const opcao = this.page.getByText(vestibularEscolhido, { exact: true });
+        const opcao = this.page.getByRole('option', { name: vestibularEscolhido, exact: true });
         await opcao.waitFor({ state: 'visible', timeout: 10000 });
         await opcao.click();
 
@@ -46,103 +43,65 @@ export class Essays {
         await expect(labelResultado).toBeVisible({ timeout: 5000 });
     }
 
-    async randomTipoTexto(): Promise<string> {
-        const tipoTextoSection = this.page.getByText(' Selecione o tipo de texto ', { exact: true });
-        await tipoTextoSection.waitFor({ state: 'visible', timeout: 10000 });
-        await tipoTextoSection.click();
-
-        const tipo_texto = essays.tipo_texto;
-        const randomIndex = Math.floor(Math.random() * tipo_texto.length);
-        const tipoTextoEscolhido = tipo_texto[randomIndex];
-
-        const option = this.page.getByText(tipoTextoEscolhido, { exact: true });
-        await option.waitFor({ state: 'visible', timeout: 10000 });
-        await option.click();
-
-        return tipoTextoEscolhido;
-    }
-
     async selectThemeOfTheWeek() {
+
+        if (await skipIfAlreadyDone(this.page, 'Tema Escolhido')) return;
 
         const label = this.page.getByText('Tema da semana', { exact: true });
         await label.waitFor({ state: 'visible', timeout: 10000 });
 
-        // .last() pega o container mais próximo/específico do label
-        const container = this.page.locator('div', { has: label }).last();
+        const container = this.page.locator('div.MuiContainer-root', { has: label }).last();
 
-        const themeText = container.locator('p').last();
+        const themeText = container
+            .locator('p')
+            .filter({ hasNotText: 'Tema da semana' })
+            .first();
 
         await themeText.waitFor({ state: 'visible', timeout: 10000 });
 
         const textoEscolhido = (await themeText.textContent())?.trim();
-        console.log(`[selectThemeOfTheWeek] tema da semana selecionado: ${textoEscolhido}`);
+        console.log(`[selectThemeOfTheWeek] tema da semana: ${textoEscolhido}`);
 
         await themeText.click();
+
+        const temaEscolhidoLabel = this.page.getByText('Tema Escolhido', { exact: true });
+        await temaEscolhidoLabel.waitFor({ state: 'visible', timeout: 5000 });
     }
 
     async selectTipoTexto(tipodetextoEscolhido: string) {
 
-        const jaSelecionado = await this.page
-            .getByText(tipodetextoEscolhido, { exact: true })
-            .isVisible({ timeout: 1000 })
-            .catch(() => false);
-        if (jaSelecionado) return;
+        if (await skipIfAlreadyDone(this.page, tipodetextoEscolhido)) return;
 
-        const tipotextoField = this.page.getByText(' Selecione o tipo de texto ');
+        const tipotextoField = this.page.getByText(' Selecione o tipo de texto ').first();
         await tipotextoField.waitFor({ state: 'visible', timeout: 10000 });
         await tipotextoField.click();
 
-        const opcao = this.page.getByText(tipodetextoEscolhido, { exact: true });
+        const opcao = this.page.getByRole('option', { name: tipodetextoEscolhido, exact: true });
         await opcao.waitFor({ state: 'visible', timeout: 10000 });
         await opcao.click();
-    }
-
-    async selectRandomGeneroDissertativo() {
-        const generos = essays.genero_textual.dissertativo;
-        const randomIndex = Math.floor(Math.random() * generos.length);
-        const generoEscolhido = generos[randomIndex];
-
-        await this.page.getByText(generoEscolhido, { exact: true }).click();
-    }
-
-    async selectRandomGeneroNarrativo() {
-        const generos = essays.genero_textual.narrativo;
-        const randomIndex = Math.floor(Math.random() * generos.length);
-        const generoEscolhido = generos[randomIndex];
-
-        await this.page.getByText(generoEscolhido, { exact: true }).click();
-
-        const message = this.page.getByText('Neste tipo de texto, o CRIA fará uma correção detalhada por 500 moedas, sem atribuir nota.');
-        await message.waitFor({ state: 'visible', timeout: 10000 });
     }
 
     async selectGeneroTextual(generotextualEscolhido: string) {
 
-        const generotextualField = this.page.getByText('Gênero Textual');
+        if (await skipIfAlreadyDone(this.page, generotextualEscolhido)) return;
+
+        const generotextualField = this.page.getByText('Gênero Textual').first();
         await generotextualField.waitFor({ state: 'visible', timeout: 10000 });
         await generotextualField.click();
 
-        const opcao = this.page.getByText(generotextualEscolhido, { exact: true });
+        const opcao = this.page.getByRole('option', { name: generotextualEscolhido, exact: true });
         await opcao.waitFor({ state: 'visible', timeout: 10000 });
         await opcao.click();
-
-    }
-
-    async selectRandomArea() {
-        const areas = essays.areas;
-        const randomIndex = Math.floor(Math.random() * areas.length);
-        const areaEscolhido = areas[randomIndex];
-
-        await this.page.getByText(areaEscolhido, { exact: true }).click();
     }
 
     async selectArea(areaEscolhida: string) {
+        if (await skipIfAlreadyDone(this.page, 'Resultado')) return;
 
-        const vestibularField = this.page.getByText(' Busca por área');
-        await vestibularField.waitFor({ state: 'visible', timeout: 10000 });
-        await vestibularField.click();
+        const areaField = this.page.getByText(' Busca por área').first();
+        await areaField.waitFor({ state: 'visible', timeout: 10000 });
+        await areaField.click();
 
-        const opcao = this.page.getByText(areaEscolhida, { exact: true });
+        const opcao = this.page.getByRole('option', { name: areaEscolhida, exact: true });
         await opcao.waitFor({ state: 'visible', timeout: 10000 });
         await opcao.click();
 
@@ -152,9 +111,7 @@ export class Essays {
 
     async selectThemeFromResult(themeName: string) {
 
-        const temaEscolhidoLabel = this.page.getByText('Tema Escolhido', { exact: true });
-        const jaEscolhido = await temaEscolhidoLabel.isVisible({ timeout: 1000 }).catch(() => false);
-        if (jaEscolhido) return;
+        if (await skipIfAlreadyDone(this.page, 'Tema Escolhido')) return;
 
         const resultTitle = this.page.getByText('Resultado', { exact: true });
         await resultTitle.waitFor({ state: 'visible', timeout: 10000 });
@@ -167,6 +124,8 @@ export class Essays {
     }
 
     async selectRandomThemeFromResult() {
+
+        if (await skipIfAlreadyDone(this.page, 'Tema Escolhido')) return;
 
         const resultTitle = this.page.getByText('Resultado', { exact: true });
         await resultTitle.waitFor({ state: 'visible', timeout: 10000 });
@@ -190,6 +149,9 @@ export class Essays {
     }
 
     async goToRandomThemePageAndSelect() {
+
+        if (await skipIfAlreadyDone(this.page, 'Tema Escolhido')) return;
+
         const numerosPagina = this.page.locator('.MuiPagination-ul li').filter({ hasText: /^\d+$/ });
         await numerosPagina.first().waitFor({ state: 'visible', timeout: 15000 });
 
@@ -223,7 +185,6 @@ export class Essays {
         await temas.nth(randomIndex).click();
     }
 
-
     async selectSearchByKeyword(tema?: string): Promise<string | null> {
 
         const temaEscolhido = tema ?? essays.temas_redacao[
@@ -233,6 +194,10 @@ export class Essays {
         const campo = this.page.getByPlaceholder('Busca por palavras chave');
 
         await campo.click();
+        // Limpa o campo antes de digitar: se um retry reexecutar esse método,
+        // o campo pode já ter texto de uma tentativa anterior, e pressSequentially
+        // ACRESCENTA ao texto existente em vez de substituir.
+        await campo.fill('');
         await campo.pressSequentially(temaEscolhido, { delay: 50 });
 
         const semTemas = this.page.getByText('Sem temas', { exact: true });
@@ -248,50 +213,6 @@ export class Essays {
         await opcao.first().click();
 
         return temaEscolhido;
-
-    }
-
-
-
-    //AÇÕES
-
-
-    async createRandomEssay() {
-
-        const vestibularField = this.page.getByText('Busca por vestibular');
-        await vestibularField.waitFor({ state: 'visible', timeout: 10000 });
-        await vestibularField.click();
-        await this.selectRandomVestibular();
-
-        const areaField = this.page.getByText('Busca por área');
-        await areaField.waitFor({ state: 'visible', timeout: 10000 });
-        await areaField.click();
-        await this.selectRandomArea();
-
-        await this.goToRandomThemePageAndSelect();
-
-        const temaEscolhido = await this.page
-            .getByText('Tema Escolhido', { exact: true })
-            .isVisible({ timeout: 5000 })
-            .catch(() => false);
-
-        if (!temaEscolhido) {
-            await this.goToRandomThemePageAndSelect();
-        }
-
-        const tipoEscolhido = await this.randomTipoTexto();
-
-        const generoField = this.page.getByText('  Gênero Textual ');
-        await generoField.waitFor({ state: 'visible', timeout: 10000 });
-        await generoField.click();
-
-        if (tipoEscolhido === " Dissertativo") {
-            await this.selectRandomGeneroDissertativo();
-        } else if (tipoEscolhido === 'Narrativo') {
-            await this.selectRandomGeneroNarrativo();
-        }
-
-        await this.clickStartNewEssay();
     }
 
 }

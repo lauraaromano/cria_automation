@@ -8,7 +8,11 @@ function wrapWithRetry(originalTest: BaseTest): BaseTest {
     // O parâmetro PRECISA estar desestruturado assim, literalmente no código-fonte,
     // porque o Playwright lê o texto da função pra saber quais fixtures injetar.
     return originalTest(name, async ({ page }, testInfo) => {
-      await retryOnReload(page, () => fn({ page, ...({} as any) }), { label: name });
+      await retryOnReload(
+        page,
+        () => fn({ page, ...({} as any) }),
+        { label: name, maxRetries: 10 },
+      );
     });
   }) as unknown as BaseTest;
 
