@@ -1,5 +1,5 @@
 import { Page, expect } from "@playwright/test"
-import { essays } from "../fixtures";
+import { essays } from "../../fixtures";
 
 async function skipIfAlreadyDone(page: Page, doneMarkerText: string, exact = true): Promise<boolean> {
     return await page.getByText(doneMarkerText, { exact }).isVisible({ timeout: 1000 }).catch(() => false);
@@ -27,10 +27,6 @@ export class Essays {
     async selectVestibular(vestibularEscolhido: string) {
 
         if (await skipIfAlreadyDone(this.page, 'Tema Escolhido')) return;
-
-        // .first() resolve strict mode violation: quando o dropdown já está
-        // aberto (ex: retry anterior), o texto "Busca por vestibular" aparece
-        // duplicado (no campo fechado + na opção ativa da lista)
         const vestibularField = this.page.getByText('Busca por vestibular').first();
         await vestibularField.waitFor({ state: 'visible', timeout: 10000 });
         await vestibularField.click();
@@ -157,7 +153,9 @@ export class Essays {
 
         const textos = await numerosPagina.allTextContents();
         const totalPaginas = Math.max(...textos.map(Number));
-        const randomPage = Math.floor(Math.random() * totalPaginas) + 1;
+        
+        const limiteMaximo = Math.min(totalPaginas, 20);
+        const randomPage = Math.floor(Math.random() * limiteMaximo) + 1;
 
         const nextButton = this.page.getByRole('button', { name: 'Go to next page' });
         const previousButton = this.page.getByRole('button', { name: 'Go to previous page' });
@@ -181,38 +179,82 @@ export class Essays {
             .locator('> div.MuiGrid-root.MuiGrid-item');
 
         const count = await temas.count();
+        if (count === 0) {
+            throw new Error('[goToRandomThemePageAndSelect] Nenhum tema encontrado em "Outros Temas" após navegação de página.');
+        }
+
         const randomIndex = Math.floor(Math.random() * count);
         await temas.nth(randomIndex).click();
+
+        const temaEscolhidoLabel = this.page.getByText('Tema Escolhido', { exact: true });
+        await temaEscolhidoLabel.waitFor({ state: 'visible', timeout: 5000 });
     }
 
-    async selectSearchByKeyword(tema?: string): Promise<string | null> {
+    async selectSearchByKeyword(
+        tema?: string,
+        vestibular?: keyof typeof essays.temas_redacao): Promise<string | null> {
+        type Vestibular = keyof typeof essays.temas_redacao;
 
-        const temaEscolhido = tema ?? essays.temas_redacao[
-            Math.floor(Math.random() * essays.temas_redacao.length)
-        ];
-
-        const campo = this.page.getByPlaceholder('Busca por palavras chave');
-
+        const vestibulares = Object.keys(
+            essays.temas_redacao
+        ) as Vestibular[];
+        const vestibularEscolhido =
+            vestibular ??
+            vestibulares[
+            Math.floor(Math.random() * vestibulares.length)
+            ];
+        const temasDoVestibular =
+            essays.temas_redacao[vestibularEscolhido];
+        const temaEscolhido =
+            tema ??
+            temasDoVestibular[
+            Math.floor(Math.random() * temasDoVestibular.length)
+            ];
+        const campo = this.page.getByPlaceholder(
+            'Busca por palavras chave'
+        );
         await campo.click();
-        // Limpa o campo antes de digitar: se um retry reexecutar esse método,
-        // o campo pode já ter texto de uma tentativa anterior, e pressSequentially
-        // ACRESCENTA ao texto existente em vez de substituir.
         await campo.fill('');
-        await campo.pressSequentially(temaEscolhido, { delay: 50 });
 
-        const semTemas = this.page.getByText('Sem temas', { exact: true });
-
-        const naoEncontrou = await semTemas.isVisible({ timeout: 3000 }).catch(() => false);
-
+        await campo.pressSequentially(
+            temaEscolhido,
+            { delay: 50 }
+        );
+        const semTemas = this.page.getByText(
+            'Sem temas',
+            { exact: true }
+        );
+        const naoEncontrou = await semTemas
+            .isVisible({ timeout: 3000 })
+            .catch(() => false);
         if (naoEncontrou) {
             return null;
         }
-
-        const opcao = this.page.locator('[role="option"]', { hasText: temaEscolhido });
-        await opcao.first().waitFor({ state: 'visible', timeout: 5000 });
+        const opcao = this.page.locator(
+            '[role="option"]',
+            { hasText: temaEscolhido }
+        );
+        await opcao.first().waitFor({
+            state: 'visible',
+            timeout: 5000
+        });
         await opcao.first().click();
-
         return temaEscolhido;
     }
 
+    async enemEssay() {
+        await this.selectVestibular("Enem");
+        await this.selectThemeFromResult(essays.temas_redacao.enem[1]);
+        await this.selectTipoTexto(essays.tipo_texto[0]);
+        await this.selectGeneroTextual(essays.genero_textual.dissertativo[0]);
+        await this.clickStartNewEssay();
+    }
+
+    async othersGendersEssay() {
+        await this.selectVestibular(essays.vestibulares[1]);
+        await this.selectThemeFromResult(essays.temas_redacao.unicamp[5]);
+        await this.selectTipoTexto(essays.tipo_texto[1]);
+        await this.selectGeneroTextual(essays.genero_textual.narrativo[3]);
+        await this.clickStartNewEssay();
+    }
 }

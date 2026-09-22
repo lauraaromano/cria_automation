@@ -16,7 +16,7 @@ test.beforeEach(async ({ page }) => {
 
 test('deve criar uma redação estilo Enem com sucesso', async () => {
     await essays.selectVestibular("Enem");
-    await essays.selectThemeFromResult(essayData.temas_redacao[0]); //COLCOAR AQUI UMA ILTRAGEM COM TEMAS SOMENTE DO ENEM
+    await essays.selectThemeFromResult(essayData.temas_redacao.enem[1]); 
     await essays.selectTipoTexto(essayData.tipo_texto[0]);
     await essays.selectGeneroTextual(essayData.genero_textual.dissertativo[0]);
     await essays.clickStartNewEssay();
@@ -24,7 +24,7 @@ test('deve criar uma redação estilo Enem com sucesso', async () => {
 
 test('deve criar uma redação com Outros Gêneros (Dissertativo) com sucesso', async () => {
     await essays.selectVestibular(essayData.vestibulares[3]);
-    await essays.selectThemeFromResult(essayData.temas_redacao[1]); //COLCOAR AQUI UMA ILTRAGEM COM TEMAS SOMENTE DO ENEM
+    await essays.selectThemeFromResult(essayData.temas_redacao.unesp[4]); 
     await essays.selectTipoTexto(essayData.tipo_texto[0]);
     await essays.selectGeneroTextual(essayData.genero_textual.dissertativo[1]);
     await essays.clickStartNewEssay();
@@ -32,7 +32,7 @@ test('deve criar uma redação com Outros Gêneros (Dissertativo) com sucesso', 
 
 test('deve criar uma redação com Outros Gêneros (Narrativo) com sucesso', async () => {
     await essays.selectVestibular(essayData.vestibulares[1]);
-    await essays.selectThemeFromResult(essayData.temas_redacao[2]);
+    await essays.selectThemeFromResult(essayData.temas_redacao.unicamp[5]);
     await essays.selectTipoTexto(essayData.tipo_texto[1]);
     await essays.selectGeneroTextual(essayData.genero_textual.narrativo[3]);
     await essays.clickStartNewEssay();
@@ -76,16 +76,17 @@ test('deve selecinar uma área e um vestibular existente como filtro', async () 
     await essays.clickStartNewEssay();
 });
 
-test('deve selecinar um tema de redação através do Tema da semana', async () => {
-    await essays.selectThemeOfTheWeek();
-    await essays.selectTipoTexto(essayData.tipo_texto[0]);
-    await essays.selectGeneroTextual(essayData.genero_textual.narrativo[1]);
-    await essays.clickStartNewEssay();
-});
-
 test('deve selecinar um tema de redação através de Outros', async () => {
     await essays.goToRandomThemePageAndSelect();
     await essays.selectTipoTexto(essayData.tipo_texto[0]);
     await essays.selectGeneroTextual(essayData.genero_textual.dissertativo[5]);
     await essays.clickStartNewEssay();
 });
+
+test('deve selecinar um tema de redação através do Tema da semana', async () => {
+    await essays.selectThemeOfTheWeek();
+    await essays.selectTipoTexto(essayData.tipo_texto[1]);
+    await essays.selectGeneroTextual(essayData.genero_textual.narrativo[1]);
+    await essays.clickStartNewEssay();
+});
+

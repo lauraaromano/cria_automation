@@ -1,2 +1,3 @@
 export * from './Login';
-export * from './Essays';
+export * from './essays/EssaysPreparation';
+export * from './essays/EssaysWriting';
