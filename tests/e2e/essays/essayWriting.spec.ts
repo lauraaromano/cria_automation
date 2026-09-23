@@ -1,22 +1,27 @@
-import { test, users, Essays, Login, expect } from '../../support';
-import { essays as essayData } from '../../support/fixtures';
+import { test, users, Essays, EssaysWriting, Login, expect } from '../../support';
+import { AlertHandler, essays as essayData } from '../../support/fixtures';
 
 test.setTimeout(0);
 
 let login: Login;
-let essays: Essays;
+let essaysPreparation: Essays;
+let essaysWriting: EssaysWriting;
 
 test.beforeEach(async ({ page }) => {
     login = new Login(page);
-    essays = new Essays(page);
+    essaysPreparation = new Essays(page);
+    essaysWriting = new EssaysWriting(page);
     await login.login(users.valid.email, users.valid.password);
     await login.IsLoggedIn();
-    await essays.clickCreateEssay();
+    await essaysPreparation.clickCreateEssay();
 });
 
-test('deve escrever uma redação estilo ENEM e enviar para correção com sucesso', async () => {
-    await essays.enemEssay();
-
+test('deve escrever uma redação estilo ENEM e enviar para correção com sucesso', async ({ page }) => {
+    await essaysPreparation.enemEssay()
+    await essaysWriting.essayTitle(essayData.redações.redacoes_validas[0].titulo)
+    await essaysWriting.essayTextArea(essayData.redações.redacoes_validas[0].texto)
+    await essaysWriting.AiValidationButton()
+    // FALTA COLOCAR AS VALIDAÇÕES DAS DUAS MENAGENS QUE APARECEM
 });
 
 // test('deve escrever uma redação com menos de 600 caracteres e impedir o envio para correção', async () => {

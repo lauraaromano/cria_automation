@@ -154,7 +154,7 @@ export class Essays {
         const textos = await numerosPagina.allTextContents();
         const totalPaginas = Math.max(...textos.map(Number));
         
-        const limiteMaximo = Math.min(totalPaginas, 20);
+        const limiteMaximo = Math.min(totalPaginas, 45);
         const randomPage = Math.floor(Math.random() * limiteMaximo) + 1;
 
         const nextButton = this.page.getByRole('button', { name: 'Go to next page' });

@@ -5,23 +5,26 @@ async function skipIfAlreadyDone(page: Page, doneMarkerText: string, exact = tru
     return await page.getByText(doneMarkerText, { exact }).isVisible({ timeout: 1000 }).catch(() => false);
 }
 
-export class EssaysWriting  {
+export class EssaysWriting {
     page: Page
 
     constructor(page: Page) {
         this.page = page
     }
 
-    async clickCreateEssay() {
-        await this.page
-            .getByRole('button', { name: 'Criar redação' })
-            .click();
+    async essayTitle(titulo: string) {
+        await this.page.locator('#tituloRedacao').fill(titulo);
     }
 
-    async clickStartNewEssay() {
+    async essayTextArea(essay: string) {
+        await this.page.locator('#textArea').fill(essay)
+
+    }
+
+    async AiValidationButton(){
         await this.page
-            .getByRole('button', { name: 'Começar nova redação' })
-            .click();
+            .getByRole('button', { name: 'Avaliar redação com IA  ' })
+            .click()
     }
 
 }

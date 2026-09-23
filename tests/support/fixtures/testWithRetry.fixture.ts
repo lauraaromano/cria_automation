@@ -5,8 +5,6 @@ type BaseTest = typeof popupHandlerTest;
 
 function wrapWithRetry(originalTest: BaseTest): BaseTest {
   const wrapped = ((name: string, fn: (args: any) => Promise<void>) => {
-    // O parâmetro PRECISA estar desestruturado assim, literalmente no código-fonte,
-    // porque o Playwright lê o texto da função pra saber quais fixtures injetar.
     return originalTest(name, async ({ page }, testInfo) => {
       await retryOnReload(
         page,

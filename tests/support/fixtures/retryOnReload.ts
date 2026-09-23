@@ -1,4 +1,3 @@
-// tests/e2e/support/fixtures/retryOnReload.ts
 import { Page } from '@playwright/test';
 
 type RetryOptions = {
@@ -43,10 +42,7 @@ export async function retryOnReload<T>(
 
     const reloadPromise = new Promise<never>((_, reject) => {
       const handler = () => {
-        // Ignora o reload SOMENTE se fn() já tiver terminado (sucesso real).
-        // Não compara mais URL — comparar URL causava falso negativo quando
-        // o reload levava a uma URL ligeiramente diferente da inicial,
-        // fazendo o retry nunca perceber o problema.
+     
         if (fnSettled) return;
 
         reloadDetected = true;
