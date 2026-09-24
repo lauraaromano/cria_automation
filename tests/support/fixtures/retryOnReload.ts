@@ -1,6 +1,6 @@
-import { Page } from '@playwright/test';
+import type { Page } from '@playwright/test';
 
-type RetryOptions = {
+export type RetryOptions = {
   maxRetries?: number;
   label?: string;
   recoveryButtonName?: string;
@@ -11,70 +11,129 @@ export async function retryOnReload<T>(
   fn: () => Promise<T>,
   options: RetryOptions = {},
 ): Promise<T> {
-  const { maxRetries = 3, label = 'fluxo', recoveryButtonName = 'Criar redação' } = options;
+  const {
+    maxRetries = 3,
+    label = 'fluxo',
+    recoveryButtonName = 'Criar redação',
+  } = options;
 
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
-
-    const jaConcluiu = await page
-      .getByRole('textbox', { name: 'Digite o título aqui' })
-      .isVisible({ timeout: 1500 })
-      .catch(() => false);
-
-    if (jaConcluiu) {
-      console.log(`[retryOnReload] "${label}": já está na tela de escrita da redação, fluxo concluído.`);
-      return undefined as T;
-    }
+    console.log(
+      `[retryOnReload] "${label}": iniciando tentativa ` +
+        `${attempt}/${maxRetries}`,
+    );
 
     if (attempt > 1) {
-      const recoveryButton = page.getByRole('button', { name: recoveryButtonName });
-      const precisaRecuperar = await recoveryButton.isVisible({ timeout: 2000 }).catch(() => false);
+      await page
+        .waitForLoadState('domcontentloaded')
+        .catch(() => {});
+
+      await page.waitForTimeout(1000).catch(() => {});
+
+      const recoveryButton = page.getByRole('button', {
+        name: recoveryButtonName,
+      });
+
+      const precisaRecuperar = await recoveryButton
+        .isVisible({ timeout: 2000 })
+        .catch(() => false);
+
       if (precisaRecuperar) {
-        console.log(`[retryOnReload] "${label}": página voltou ao início, clicando em "${recoveryButtonName}" de novo...`);
-        await recoveryButton.click().catch(() => {});
+        console.log(
+          `[retryOnReload] "${label}": clicando novamente em ` +
+            `"${recoveryButtonName}"`,
+        );
+
+        await recoveryButton.click();
       }
     }
 
     let reloadDetected = false;
-    let fnSettled = false;
+    let fnFinished = false;
 
-    const fnPromise = fn().finally(() => { fnSettled = true; });
-    fnPromise.catch(() => {});
+    let rejectReload!: (error: Error) => void;
 
     const reloadPromise = new Promise<never>((_, reject) => {
-      const handler = () => {
-     
-        if (fnSettled) return;
-
-        reloadDetected = true;
-        page.off('load', handler);
-        reject(new Error(`[retryOnReload] página recarregou durante "${label}" (URL atual: ${page.url()})`));
-      };
-      page.on('load', handler);
-      fnPromise.finally(() => page.off('load', handler));
+      rejectReload = reject;
     });
 
+    const loadHandler = () => {
+      if (fnFinished) {
+        return;
+      }
+
+      reloadDetected = true;
+
+      const error = new Error(
+        `[retryOnReload] página recarregou durante "${label}" ` +
+          `(URL atual: ${page.url()})`,
+      );
+
+      rejectReload(error);
+    };
+
+    // O listener precisa ser criado ANTES da execução da função.
+    page.on('load', loadHandler);
+
+    const fnPromise = fn().finally(() => {
+      fnFinished = true;
+      page.off('load', loadHandler);
+    });
+
+    // Evita rejeição não tratada da Promise original.
+    fnPromise.catch(() => {});
+
     try {
-      const result = await Promise.race([fnPromise, reloadPromise]);
-      return result as T;
-    } catch (err) {
+      const result = await Promise.race([
+        fnPromise,
+        reloadPromise,
+      ]);
+
+      page.off('load', loadHandler);
+
+      return result;
+    } catch (error) {
+      page.off('load', loadHandler);
+
+      // Aguarda a função original terminar, mesmo que o reload
+      // tenha vencido a corrida.
       await fnPromise.catch(() => {});
 
+      const message =
+        error instanceof Error
+          ? error.message
+          : String(error);
+
       if (attempt === maxRetries) {
-        console.log(
-          `[retryOnReload] "${label}": esgotou ${maxRetries} tentativas. Último erro: ${(err as Error).message}`,
+        console.error(
+          `[retryOnReload] "${label}": esgotou as ` +
+            `${maxRetries} tentativas.`,
         );
-        throw err;
+
+        throw error;
       }
 
       console.log(
-        `[retryOnReload] "${label}": falhou na tentativa ${attempt}` +
-        `${reloadDetected ? ' (reload detectado no meio do fluxo)' : ''}. Tentando novamente...`,
+        `[retryOnReload] "${label}": erro na tentativa ` +
+          `${attempt}: ${message}`,
       );
 
-      await page.waitForLoadState('domcontentloaded').catch(() => {});
+      if (reloadDetected) {
+        console.log(
+          `[retryOnReload] "${label}": reload detectado. ` +
+            'O fluxo será executado novamente.',
+        );
+      }
+
+      await page
+        .waitForLoadState('domcontentloaded')
+        .catch(() => {});
+
       await page.waitForTimeout(1000).catch(() => {});
     }
   }
 
-  throw new Error('unreachable');
+  throw new Error(
+    `[retryOnReload] "${label}": fluxo terminou inesperadamente.`,
+  );
 }

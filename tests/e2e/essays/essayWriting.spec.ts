@@ -1,5 +1,5 @@
-import { test, users, Essays, EssaysWriting, Login, expect } from '../../support';
-import { AlertHandler, essays as essayData, retryOnReload } from '../../support/fixtures';
+import { test, expect, users, essays as essayData, retryOnReload, AlertHandler, Essays, EssaysWriting, Login, } from '../../support';
+
 
 test.setTimeout(0);
 
@@ -17,26 +17,21 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('deve escrever uma redação estilo ENEM e enviar para correção com sucesso', async ({ page }) => {
-
     await retryOnReload(page, () => essaysPreparation.EssayPreparation(
         essayData.vestibulares[0],
         essayData.temas_redacao.enem[3],
         essayData.tipo_texto[0],
         essayData.genero_textual.dissertativo[0],
-    ),
-        { maxRetries: 5 },
-    );
-    await retryOnReload(
-        page,
-        async () => {
+    ),{ maxRetries: 5 },);
+    
+    await retryOnReload(page, async () => {
             await essaysWriting.essayTitle(essayData.redações.redacoes_validas[0].titulo);
             await essaysWriting.essayTextArea(essayData.redações.redacoes_validas[0].texto);
         },
         { maxRetries: 5 },
     );
-
     await essaysWriting.AiValidationButton();
-    // await AlertHandler.expectAlertMessage(page, "Redação validada com sucesso")
+    await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso")
     // FALTA COLOCAR AS VALIDAÇÕES DAS DUAS MENSAGENS QUE APARECEM
 });
 
@@ -46,19 +41,18 @@ test('deve escrever uma redação com menos de 600 caracteres e impedir o envio 
         essayData.temas_redacao.enem[3],
         essayData.tipo_texto[0],
         essayData.genero_textual.dissertativo[0],
-    ),
-        { maxRetries: 5 },
-    );
-    await retryOnReload(
-        page,
-        async () => {
+    ),{ maxRetries: 5 },);
+    
+    await retryOnReload(page, async () => {
             await essaysWriting.essayTitle(essayData.redações.redacoes_menos_600[0].titulo);
             await essaysWriting.essayTextArea(essayData.redações.redacoes_menos_600[0].texto);
         },
         { maxRetries: 5 },
     );
-
     await essaysWriting.AiValidationButton();
+    await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso")
+    await AlertHandler.expectAlertMessage(page, "Tamanho mínimo da redação não atingido, escreva pelo menos 600 caracteres!")
+
 });
 
 // test('deve tentar enviar uma redação sem conteúdo e impedir o envio para correção', async () => {
