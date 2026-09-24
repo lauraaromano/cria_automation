@@ -55,6 +55,8 @@ export class Essays {
 
         await themeText.waitFor({ state: 'visible', timeout: 10000 });
 
+        await expect(themeText).not.toHaveText('', { timeout: 10000 });
+
         const textoEscolhido = (await themeText.textContent())?.trim();
         console.log(`[selectThemeOfTheWeek] tema da semana: ${textoEscolhido}`);
 
@@ -68,26 +70,55 @@ export class Essays {
 
         if (await skipIfAlreadyDone(this.page, tipodetextoEscolhido)) return;
 
-        const tipotextoField = this.page.getByText(' Selecione o tipo de texto ').first();
-        await tipotextoField.waitFor({ state: 'visible', timeout: 10000 });
-        await tipotextoField.click();
+        const placeholder = this.page.getByText(' Selecione o tipo de texto ').first();
+        await placeholder.waitFor({ state: 'visible', timeout: 10000 });
+
+        const comboboxHandle = await placeholder
+            .locator('xpath=ancestor::*[@role="combobox"]')
+            .first()
+            .elementHandle();
+
+        if (!comboboxHandle) {
+            throw new Error('[selectTipoTexto] combobox pai não encontrado.');
+        }
+
+        await comboboxHandle.click();
 
         const opcao = this.page.getByRole('option', { name: tipodetextoEscolhido, exact: true });
         await opcao.waitFor({ state: 'visible', timeout: 10000 });
         await opcao.click();
+
+
+        await expect
+            .poll(async () => (await comboboxHandle.textContent())?.trim(), { timeout: 5000 })
+            .toContain(tipodetextoEscolhido);
     }
 
     async selectGeneroTextual(generotextualEscolhido: string) {
 
         if (await skipIfAlreadyDone(this.page, generotextualEscolhido)) return;
 
-        const generotextualField = this.page.getByText('Gênero Textual').first();
-        await generotextualField.waitFor({ state: 'visible', timeout: 10000 });
-        await generotextualField.click();
+        const placeholder = this.page.getByText('Gênero Textual', { exact: true }).first();
+        await placeholder.waitFor({ state: 'visible', timeout: 10000 });
+
+        const comboboxHandle = await placeholder
+            .locator('xpath=ancestor::*[@role="combobox"]')
+            .first()
+            .elementHandle();
+
+        if (!comboboxHandle) {
+            throw new Error('[selectGeneroTextual] combobox pai não encontrado.');
+        }
+
+        await comboboxHandle.click();
 
         const opcao = this.page.getByRole('option', { name: generotextualEscolhido, exact: true });
         await opcao.waitFor({ state: 'visible', timeout: 10000 });
         await opcao.click();
+
+        await expect
+            .poll(async () => (await comboboxHandle.textContent())?.trim(), { timeout: 5000 })
+            .toContain(generotextualEscolhido);
     }
 
     async selectArea(areaEscolhida: string) {
@@ -154,7 +185,7 @@ export class Essays {
         const textos = await numerosPagina.allTextContents();
         const totalPaginas = Math.max(...textos.map(Number));
         
-        const limiteMaximo = Math.min(totalPaginas, 45);
+        const limiteMaximo = Math.min(totalPaginas, 88);
         const randomPage = Math.floor(Math.random() * limiteMaximo) + 1;
 
         const nextButton = this.page.getByRole('button', { name: 'Go to next page' });
@@ -242,19 +273,12 @@ export class Essays {
         return temaEscolhido;
     }
 
-    async enemEssay() {
-        await this.selectVestibular("Enem");
-        await this.selectThemeFromResult(essays.temas_redacao.enem[1]);
-        await this.selectTipoTexto(essays.tipo_texto[0]);
-        await this.selectGeneroTextual(essays.genero_textual.dissertativo[0]);
+    async EssayPreparation(vestibular: string, result: string, tipo_texto: string, genero: string) {
+        await this.selectVestibular(vestibular);
+        await this.selectThemeFromResult(result);
+        await this.selectTipoTexto(tipo_texto);
+        await this.selectGeneroTextual(genero);
         await this.clickStartNewEssay();
     }
 
-    async othersGendersEssay() {
-        await this.selectVestibular(essays.vestibulares[1]);
-        await this.selectThemeFromResult(essays.temas_redacao.unicamp[5]);
-        await this.selectTipoTexto(essays.tipo_texto[1]);
-        await this.selectGeneroTextual(essays.genero_textual.narrativo[3]);
-        await this.clickStartNewEssay();
-    }
 }

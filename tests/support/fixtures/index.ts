@@ -1,4 +1,7 @@
 import { test } from './testWithRetry.fixture';
+
+export { retryOnReload } from './retryOnReload';
+
 import { users } from './data/users';
 import essaysData from './data/essays.json';
 
