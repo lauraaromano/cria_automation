@@ -146,24 +146,97 @@
       "Estratégias para o incentivo à leitura no Brasil"
     ]
   },
-  "redações": {
-    "redacoes_validas": [
-      {
-        "titulo": "Saúde mental e os desafios da sociedade brasileira",
-        "texto": "A discussão sobre saúde mental tem ganhado espaço na sociedade brasileira, principalmente diante do aumento de casos relacionados a transtornos psicológicos. Entretanto, o preconceito e a falta de informação ainda dificultam o acesso de muitas pessoas ao tratamento adequado. Nesse contexto, torna-se necessário analisar os fatores que contribuem para a permanência desse problema e buscar medidas capazes de enfrentá-lo.\n\nEm primeiro lugar, a falta de informação contribui para a construção de estigmas relacionados às doenças mentais. Muitas pessoas ainda associam transtornos psicológicos à falta de força de vontade ou à incapacidade de enfrentar situações cotidianas. Essa visão equivocada pode fazer com que indivíduos deixem de procurar ajuda profissional por medo de julgamentos.\n\nAlém disso, a ausência de políticas públicas suficientes agrava a situação. Embora existam serviços destinados ao atendimento psicológico, a demanda da população é elevada e nem sempre há estrutura adequada para garantir um acompanhamento contínuo. Dessa forma, investimentos na área da saúde mental são fundamentais para ampliar o acesso ao atendimento.\n\nPortanto, é necessário combater o estigma associado às doenças mentais por meio da informação e de políticas públicas. Para isso, o Ministério da Saúde deve ampliar campanhas de conscientização e fortalecer os serviços de atendimento psicológico, com o objetivo de facilitar o acesso ao tratamento e promover maior qualidade de vida à população."
+  "redacoes": {
+    "redacoes_validas": {
+      "dissertativo": {
+        "dissertativo_argumentativo": [
+          {
+            "titulo": "Os impactos da desigualdade digital na educação brasileira",
+            "texto": "A desigualdade digital é um dos fatores que ainda dificultam a democratização da educação brasileira. Embora a tecnologia esteja cada vez mais presente no cotidiano, muitos estudantes não possuem acesso adequado à internet, a computadores ou a outros recursos necessários para acompanhar atividades escolares. Dessa forma, as diferenças sociais acabam também se refletindo nas oportunidades de aprendizagem.\n\nAlém da falta de equipamentos, outro problema está relacionado à qualidade do acesso disponível. Em algumas regiões, estudantes dependem de conexões instáveis ou precisam compartilhar um único dispositivo com outras pessoas da família. Essa realidade pode dificultar a realização de pesquisas, trabalhos e atividades que dependem de plataformas digitais, colocando determinados alunos em situação de desvantagem.\n\nNesse contexto, escolas, governos e comunidade devem atuar de maneira conjunta para reduzir essas desigualdades. A ampliação do acesso à internet, a disponibilização de equipamentos e a capacitação de professores são medidas importantes para garantir que a tecnologia seja utilizada como instrumento de inclusão. Assim, será possível ampliar as oportunidades educacionais e contribuir para uma formação mais igualitária."
+          }
+        ],
+        "resenha_crítica": [
+          { 
+            "titulo": "Entre telas e escolhas: uma reflexão sobre o uso da tecnologia", 
+            "texto": "O documentário fictício Entre Telas apresenta diferentes situações relacionadas à presença da tecnologia na rotina de adolescentes. Ao acompanhar personagens que utilizam redes sociais, plataformas de estudo e aplicativos de comunicação diariamente, a produção procura discutir como essas ferramentas podem influenciar comportamentos, relações pessoais e formas de aprendizado.\n\nUm dos principais méritos da obra está na maneira acessível como aborda um assunto presente na vida de grande parte dos jovens. Em vez de apresentar a tecnologia apenas como um problema, o documentário também mostra seus benefícios, como a facilidade para encontrar informações, manter contato com outras pessoas e acessar conteúdos educacionais. Essa abordagem contribui para uma discussão menos simplista sobre o tema.\n\nApesar disso, alguns momentos poderiam apresentar maior aprofundamento sobre questões relacionadas à privacidade e ao excesso de tempo diante das telas. Ainda assim, a produção consegue estimular uma reflexão importante sobre a maneira como cada indivíduo utiliza os recursos digitais. Por isso, Entre Telas pode ser considerado um material relevante para quem deseja refletir sobre a relação entre tecnologia, comportamento e sociedade." 
+          }
+        ],
+        "editorial": [
+          {
+            "titulo": "A escola precisa acompanhar as transformações tecnológicas", 
+            "texto": "A presença da tecnologia na sociedade modificou a maneira como as pessoas trabalham, estudam e se comunicam. Diante dessa transformação, não é suficiente discutir se os recursos digitais devem ou não estar presentes nas escolas. A questão central deve ser como utilizá-los de maneira responsável e pedagógica para melhorar o processo de aprendizagem.\n\nComputadores, plataformas educacionais e ferramentas digitais podem ampliar o acesso ao conhecimento e oferecer novas possibilidades aos estudantes. Entretanto, simplesmente disponibilizar equipamentos não garante melhores resultados. É necessário que professores recebam formação adequada e que as escolas tenham infraestrutura capaz de sustentar o uso desses recursos de forma contínua.\n\nTambém é importante considerar que nem todos os estudantes possuem as mesmas condições fora do ambiente escolar. Por isso, políticas de inclusão digital precisam acompanhar a implementação de novas tecnologias na educação. A escola deve ser um espaço capaz de reduzir desigualdades, e não de ampliá-las.\n\nInvestir em tecnologia educacional, portanto, significa também investir em formação, infraestrutura e planejamento. A transformação digital da educação precisa ser acompanhada de políticas que garantam acesso e qualidade para todos os estudantes." 
+          }
+        ],
+        "dissertação_expositiva": [
+          { 
+            "titulo": "A influência das redes sociais na comunicação contemporânea", 
+            "texto": "As redes sociais fazem parte da comunicação cotidiana de milhões de pessoas e modificaram significativamente a maneira como informações são produzidas e compartilhadas. Plataformas digitais permitem que usuários publiquem textos, imagens e vídeos e estabeleçam contato com pessoas de diferentes localidades. Dessa forma, a comunicação tornou-se mais rápida e acessível.\n\nUma das principais características desse modelo é a possibilidade de interação imediata. Uma publicação pode receber comentários, compartilhamentos e respostas poucos minutos depois de ser disponibilizada. Além disso, as redes sociais também são utilizadas por empresas, instituições de ensino, órgãos públicos e organizações para divulgar informações e estabelecer contato com seus públicos.\n\nEntretanto, a grande quantidade de informações disponíveis exige atenção dos usuários. Conteúdos incorretos podem circular rapidamente e alcançar muitas pessoas antes que sua veracidade seja analisada. Por esse motivo, o desenvolvimento da capacidade de verificar fontes e comparar informações tornou-se uma habilidade importante no ambiente digital.\n\nAssim, as redes sociais representam uma transformação significativa nos processos de comunicação. Ao mesmo tempo em que ampliam as possibilidades de interação e acesso à informação, também criam novos desafios relacionados à qualidade e à circulação dos conteúdos publicados." 
+          }
+        ],
+        "artigo_opiniao": [
+          { 
+            "titulo": "Por que a educação digital deve fazer parte da formação dos jovens", 
+            "texto": "A tecnologia já está presente em praticamente todas as áreas da sociedade, mas ainda existe uma diferença importante entre saber utilizar ferramentas digitais e compreender como utilizá-las de maneira consciente. Por isso, considero que a educação digital deve fazer parte da formação dos jovens desde os primeiros anos escolares.\n\nAprender a utilizar um computador ou uma plataforma não é suficiente. Os estudantes também precisam compreender questões relacionadas à segurança, à privacidade, à identificação de informações falsas e ao comportamento responsável na internet. Esses conhecimentos podem contribuir para que os jovens aproveitem melhor as oportunidades oferecidas pelo ambiente digital.\n\nAlém disso, a educação digital pode preparar os estudantes para situações que encontrarão no futuro profissional. Diversas atividades de trabalho dependem atualmente de sistemas, plataformas de comunicação e ferramentas tecnológicas. Ter contato orientado com esses recursos durante a formação pode facilitar a adaptação a diferentes contextos.\n\nPortanto, ensinar tecnologia não deve significar apenas ensinar a utilizar determinados programas. É necessário desenvolver autonomia e responsabilidade para que os jovens possam participar da sociedade digital de maneira consciente, segura e produtiva." 
+          }
+        ],
+        "carta_aberta": [
+          { 
+            "titulo": "Carta aberta à comunidade escolar pela preservação dos espaços de leitura", "texto": "À comunidade escolar,\n\nA biblioteca é um dos espaços mais importantes de uma instituição de ensino. Mais do que um local destinado ao armazenamento de livros, ela pode funcionar como ambiente de estudo, pesquisa, descoberta e desenvolvimento da autonomia dos estudantes. Por isso, sua conservação e valorização devem ser responsabilidades de toda a comunidade escolar.\n\nAtualmente, muitos estudantes possuem contato frequente com conteúdos digitais, mas isso não diminui a importância dos livros e dos espaços destinados à leitura. Pelo contrário, a biblioteca pode complementar o acesso à informação e oferecer materiais que contribuam para diferentes áreas do conhecimento. Um ambiente organizado e acolhedor também pode incentivar alunos que ainda não desenvolveram o hábito de ler.\n\nPor esse motivo, é importante que estudantes, professores e gestores participem da preservação desse espaço. A organização dos livros, o cuidado com os materiais e a criação de atividades de incentivo à leitura são ações que podem contribuir para tornar a biblioteca mais utilizada.\n\nEsperamos que a comunidade escolar reconheça a importância desse espaço e participe de iniciativas que contribuam para sua preservação e valorização. Investir na biblioteca é também investir no conhecimento e na formação dos estudantes.\n\nAtenciosamente,\n\nComunidade estudantil" 
+          }
+        ]
+      },
+      "narrativo": {
+        "crônica": [
+          {
+            "titulo": "Cinco minutos antes da aula",
+            "texto": "O relógio da escola marcava sete horas e vinte e cinco minutos quando Clara percebeu que havia esquecido o trabalho em casa. Ela ficou parada diante do portão, olhando para a própria mochila como se, por algum milagre, o papel pudesse aparecer entre os cadernos. Não apareceu.\n\nEnquanto pensava no que faria, viu um colega correndo pelo corredor, tentando chegar à sala antes do professor. Logo atrás dele, uma funcionária carregava uma pilha de livros e reclamava que ninguém mais ajudava a organizar a biblioteca. Clara sorriu. Naquela manhã, parecia que todo mundo estava atrasado para alguma coisa.\n\nEla decidiu entrar mesmo assim. Talvez pudesse explicar o que aconteceu e entregar o trabalho no dia seguinte. Quando chegou à sala, percebeu que o professor ainda não havia chegado. Sentou-se, respirou fundo e começou a contar a história para os colegas.\n\nNo fim, descobriu que não era a única que havia esquecido alguma coisa. Um colega tinha deixado o estojo em casa, outro havia perdido o ônibus e uma amiga estava procurando desesperadamente o celular. Clara riu. Talvez aquele fosse apenas mais um daqueles dias em que nada saía como planejado, mas, de alguma forma, tudo acabava dando certo."
+          }
+        ],
+        "Relato": [
+          {
+            "titulo": "Cinco minutos antes da aula",
+            "texto": "O relógio da escola marcava sete horas e vinte e cinco minutos quando Clara percebeu que havia esquecido o trabalho em casa. Ela ficou parada diante do portão, olhando para a própria mochila como se, por algum milagre, o papel pudesse aparecer entre os cadernos. Não apareceu.\n\nEnquanto pensava no que faria, viu um colega correndo pelo corredor, tentando chegar à sala antes do professor. Logo atrás dele, uma funcionária carregava uma pilha de livros e reclamava que ninguém mais ajudava a organizar a biblioteca. Clara sorriu. Naquela manhã, parecia que todo mundo estava atrasado para alguma coisa.\n\nEla decidiu entrar mesmo assim. Talvez pudesse explicar o que aconteceu e entregar o trabalho no dia seguinte. Quando chegou à sala, percebeu que o professor ainda não havia chegado. Sentou-se, respirou fundo e começou a contar a história para os colegas.\n\nNo fim, descobriu que não era a única que havia esquecido alguma coisa. Um colega tinha deixado o estojo em casa, outro havia perdido o ônibus e uma amiga estava procurando desesperadamente o celular. Clara riu. Talvez aquele fosse apenas mais um daqueles dias em que nada saía como planejado, mas, de alguma forma, tudo acabava dando certo."
+          }
+        ],
+        "notícia": [
+          {
+            "titulo": "Uma manhã diferente na escola",
+            "texto": "Na última sexta-feira, cheguei à escola mais cedo do que de costume porque precisava participar de uma atividade organizada pelos professores. O pátio ainda estava quase vazio, e poucas pessoas haviam chegado. Aproveitei o tempo para conversar com alguns colegas e ajudar na organização das mesas que seriam utilizadas durante a apresentação.\n\nQuando a atividade começou, cada grupo ficou responsável por uma tarefa. O meu grupo deveria apresentar uma pesquisa sobre tecnologia e educação. No início, fiquei bastante nervosa porque precisava falar diante de várias pessoas, mas meus colegas me ajudaram a organizar as ideias e ensaiamos algumas vezes antes da apresentação.\n\nDurante a exposição, algumas perguntas surgiram e precisamos explicar melhor determinados pontos da pesquisa. Apesar do nervosismo inicial, conseguimos responder e concluir a apresentação. Depois, os professores comentaram sobre os trabalhos realizados pelos grupos e deram algumas sugestões para futuras atividades.\n\nAo final da manhã, percebi que a experiência tinha sido diferente do que eu imaginava. Além de aprender mais sobre o tema pesquisado, consegui desenvolver minha comunicação e trabalhar melhor em equipe. Foi uma atividade simples, mas que acabou sendo uma experiência importante para mim."
+          }
+        ],
+        "conto": [
+          {
+            "titulo": "A última página",
+            "texto": "Miguel encontrou o livro em uma caixa esquecida no depósito da escola. A capa estava desgastada, algumas páginas tinham pequenas marcas e o título já não podia ser lido completamente. Mesmo assim, decidiu levá-lo para casa. Naquela noite, começou a leitura sem imaginar que aquele livro guardava uma história muito diferente.\n\nAs primeiras páginas contavam sobre uma cidade pequena, onde todos conheciam uns aos outros. O personagem principal passava os dias observando as pessoas da praça e registrando suas histórias em um caderno. Miguel continuou lendo até perceber que alguns acontecimentos descritos no livro pareciam familiares.\n\nNo capítulo seguinte, havia a descrição de uma árvore enorme localizada no centro da praça. Miguel conhecia aquela árvore. Ela ficava justamente ao lado da escola. Intrigado, virou algumas páginas e encontrou uma descrição ainda mais estranha: o personagem encontraria, em determinado dia, um livro antigo dentro de uma caixa no depósito.\n\nMiguel parou de ler. Olhou para o livro em suas mãos e depois para o relógio. A história parecia estar descrevendo exatamente o que havia acontecido naquela tarde.\n\nCom cuidado, virou a página seguinte. Ela estava em branco. Pela primeira vez, Miguel percebeu que talvez a última parte da história ainda não tivesse sido escrita. Pegou um lápis e ficou alguns segundos pensando. Então escreveu a primeira frase. Quando terminou, sorriu ao perceber que agora a história continuaria sendo construída por ele."
+          }
+        ]
       }
-    ],
-    "redacoes_menos_600": [
-      {
-        "titulo": "Os desafios da educação",
-        "texto": "A educação brasileira apresenta diversos desafios.\n\nEntre eles, estão a desigualdade de acesso e a falta de estrutura.\n\nAlém disso, muitos estudantes enfrentam dificuldades durante sua formação.\n\nPor isso, é importante buscar soluções que garantam melhores condições de ensino para todos."
-      }
-    ],
-    "redacoes_idioma_inapropriado": [
-      {
-        "titulo": "Education in Brazil",
-        "texto": "Education is an important part of society. It helps people develop their knowledge and skills.\n\nHowever, many students still face difficulties accessing quality education.\n\nThese difficulties can affect their opportunities and development throughout life.\n\nTherefore, it is necessary to create public policies that guarantee better educational opportunities for everyone."
-      }
-    ]
+    },
+    "redacoes_invalidas": {
+      "redacoes_menos_600": [
+        {
+          "titulo": "Redação com menos de 600 caracteres",
+          "texto": "A educação brasileira apresenta diversos desafios.\n\nEntre eles, estão a desigualdade de acesso e a falta de estrutura.\n\nAlém disso, muitos estudantes enfrentam dificuldades durante sua formação.\n\nPor isso, é importante buscar soluções que garantam melhores condições de ensino para todos."
+        }
+      ],
+      "redacoes_repeticao_paragrafo": [
+        {
+          "titulo": "Redação com parágrafos repetidos",
+          "texto": "A educação brasileira apresenta desafios importante. Entre eles, estão a desigualdade de acesso e a falta de estrutura escolar. Além disso, muitos estudantes enfrentam dificuldades durante sua formação. Por isso, é importante buscar soluções que garantam melhores condições de ensino a todos.\n\nA educação brasileira apresenta desafios importante. Entre eles, estão a desigualdade de acesso e a falta de estrutura escolar. Além disso, muitos estudantes enfrentam dificuldades durante sua formação. Por isso, é importante buscar soluções que garantam melhores condições de ensino a todos.\n\nA educação brasileira apresenta desafios importante. Entre eles, estão a desigualdade de acesso e a falta de estrutura escolar. Além disso, muitos estudantes enfrentam dificuldades durante sua formação. Por isso, é importante buscar soluções que garantam melhores condições de ensino a todos."
+        }
+      ],
+      "redacao_texto_aleatorio": [
+        {
+          "titulo": "Texto sem sentido",
+          "texto": "aifjwijfqaiwfjqifjwifjawijf plmoksnq wiuehfaksjd nxpqowkeutyc mznbxlaksjdhfow qpeoiruty lkzxcnvbmqwerpoiuytlkjhgfdsazxcvbnmqwertyuiopasdfghjklzxcvbnm qazwsxedcrfvtgbyhnujmikolp mnbvcxzasdfghjklpoiuytrewq lkajsdhfoiuqwpoeiruty zmxncbvlaksjdhfpoqiwuey qwoeiruaklsjdfnmv poiuytrewqlkjhgfdsazxcv bnmqwertyuiopasdfghjklzxc vbnmqwertyuiopmnbvcxz lkajsdhfpoiquwery mznxbcvlaksjdhfoqwiuey plokmijnuhbygvtfcrdxeszw aqswdefrgthyjukilop qazxswedcvfrbgtnhymju kiolp mnbvcxzlkjhgfdsapoiuytrewq alksjdhfpoiquwertylkzxcvbnm qwertyuioplkjhgfdsazxcvbnm poiuytrewqlkjhgfdsazx cvbnmqwertyuiopasdfghjklmnb vcxzpoiuytrewqlkjhgfdsazxc"
+        }
+      ],
+      "redacoes_idioma_inapropriado": [
+        {
+          "titulo": "Education in Brazil",
+          "texto": "Education is an important part of society. It helps people develop their knowledge and skills, understand the world around them, and prepare for their personal and professional futures. Through education, individuals can gain confidence, improve their ability to communicate, and learn how to solve problems in different situations. Schools also play an important role in helping students develop social skills and become responsible members of society.\n\nHowever, many students still face difficulties accessing quality education. Some students live in places where schools do not have enough teachers, learning materials, technology, or adequate infrastructure. Financial difficulties can also make it harder for families to provide students with everything they need to study. In addition, differences in access to the internet and digital resources can create even more challenges for students who need to study outside the classroom.\n\nThese difficulties can affect students' opportunities and development throughout life. When students do not receive the support they need, they may have more difficulty learning important subjects and developing essential skills. This can also affect their motivation, academic performance, and future opportunities in higher education and the job market. As a result, educational inequality can contribute to broader social and economic inequalities.\n\nAnother important issue is the quality of the learning environment. Students need safe and welcoming schools where they can focus on their studies and receive support from qualified teachers. Teachers also need proper training, adequate working conditions, and access to educational resources so they can provide effective lessons. When schools and teachers receive the necessary support, students have better conditions to develop their abilities and reach their potential.\n\nTechnology can also contribute to improving education. Computers, tablets, online platforms, and digital learning materials can provide students with access to a wider range of information and educational opportunities. However, technology alone is not enough to solve educational problems. It is necessary to ensure that students have reliable access to the internet and that teachers are prepared to use digital tools effectively in the classroom.\n\nTherefore, it is necessary to create and strengthen public policies that guarantee better educational opportunities for everyone. Governments should invest in schools, teacher training, educational materials, infrastructure, technology, and programs that support students from different social backgrounds. It is also important to reduce inequalities between different regions and communities so that all students have access to similar opportunities.\n\nBy investing in quality education and creating inclusive policies, society can help more students develop their knowledge, skills, and potential. Education can open doors to new opportunities and contribute to a more prepared, productive, and fair society. For this reason, guaranteeing access to quality education should be considered an important priority for the future."
+        }
+      ]
+    }
   }
 }
