@@ -1,4 +1,4 @@
-import { test, expect, users, essays as essayData, retryOnReload, AlertHandler, Essays, EssaysWriting, Login, } from '../../support';
+import { test, users, essays as essayData, retryOnReload, AlertHandler, Essays, EssaysWriting, Login } from '../../support';
 
 
 test.setTimeout(0);
@@ -27,12 +27,12 @@ test('deve escrever uma redação estilo ENEM e enviar para correção com suces
     await retryOnReload(page, async () => {
         await essaysWriting.essayTitle(essayData.redacoes.redacoes_validas.dissertativo.dissertativo_argumentativo[0].titulo);
         await essaysWriting.essayTextArea(essayData.redacoes.redacoes_validas.dissertativo.dissertativo_argumentativo[0].texto);
+        await essaysWriting.AiValidationButton();
+        await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso")
+        await AlertHandler.expectAlertMessage(page, "Redação validada com sucesso")
     },
-        { maxRetries: 5 },
     );
-    await essaysWriting.AiValidationButton();
-    await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso")
-    await AlertHandler.expectAlertMessage(page, "Redação validada com sucesso")
+
 
 });
 
@@ -47,12 +47,12 @@ test('deve escrever uma redação com menos de 600 caracteres e impedir o envio 
     await retryOnReload(page, async () => {
         await essaysWriting.essayTitle(essayData.redacoes.redacoes_invalidas.redacoes_menos_600[0].titulo);
         await essaysWriting.essayTextArea(essayData.redacoes.redacoes_invalidas.redacoes_menos_600[0].texto);
+        await essaysWriting.AiValidationButton();
+        await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso")
+        await AlertHandler.expectAlertMessage(page, "Tamanho mínimo da redação não atingido, escreva pelo menos 600 caracteres!")
     },
-        { maxRetries: 5 },
     );
-    await essaysWriting.AiValidationButton();
-    await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso")
-    await AlertHandler.expectAlertMessage(page, "Tamanho mínimo da redação não atingido, escreva pelo menos 600 caracteres!")
+
 
 });
 
@@ -67,12 +67,12 @@ test('deve tentar enviar uma redação sem conteúdo e impedir o envio para corr
     await retryOnReload(page, async () => {
         await essaysWriting.essayTitle(' ');
         await essaysWriting.essayTextArea(' ');
+        await essaysWriting.AiValidationButton();
+        await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso")
+        await AlertHandler.expectAlertMessage(page, "Tamanho mínimo da redação não atingido, escreva pelo menos 600 caracteres!")
     },
-        { maxRetries: 5 },
     );
-    await essaysWriting.AiValidationButton();
-    await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso")
-    await AlertHandler.expectAlertMessage(page, "Tamanho mínimo da redação não atingido, escreva pelo menos 600 caracteres!")
+
 });
 
 test('deve tentar enviar uma redação com o idioma inapropriado e impedir o envio para correção', async ({ page }) => {
@@ -86,16 +86,16 @@ test('deve tentar enviar uma redação com o idioma inapropriado e impedir o env
     await retryOnReload(page, async () => {
         await essaysWriting.essayTitle(essayData.redacoes.redacoes_invalidas.redacoes_idioma_inapropriado[0].titulo);
         await essaysWriting.essayTextArea(essayData.redacoes.redacoes_invalidas.redacoes_idioma_inapropriado[0].texto);
+        await essaysWriting.AiValidationButton();
+        await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso")
+        await AlertHandler.expectAlertMessage(page, "Idioma inapropriado! Ocorrência:")
     },
-        { maxRetries: 5 },
     );
-    await essaysWriting.AiValidationButton();
-    await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso")
-    await AlertHandler.expectAlertMessage(page, "Idioma inapropriado! Ocorrência:")
+
 
 });
 
-test('deve escrever uma redação de texto aleatório/sem sentido e impedir o envio para correção', async ({page}) => {
+test('deve escrever uma redação de texto aleatório/sem sentido e impedir o envio para correção', async ({ page }) => {
     await retryOnReload(page, () => essaysPreparation.EssayPreparation(
         essayData.vestibulares[1],
         essayData.temas_redacao.unicamp[4],
@@ -106,12 +106,12 @@ test('deve escrever uma redação de texto aleatório/sem sentido e impedir o en
     await retryOnReload(page, async () => {
         await essaysWriting.essayTitle(essayData.redacoes.redacoes_invalidas.redacao_texto_aleatorio[0].titulo);
         await essaysWriting.essayTextArea(essayData.redacoes.redacoes_invalidas.redacao_texto_aleatorio[0].texto);
+        await essaysWriting.AiValidationButton();
+        await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso")
+        await AlertHandler.expectAlertMessage(page, "Seu texto não segue o formato de uma dissertação argumentativa válida. Revise a estrutura e o conteúdo")
     },
-        { maxRetries: 5 },
     );
-    await essaysWriting.AiValidationButton();
-    await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso")
-    await AlertHandler.expectAlertMessage(page, "Seu texto não segue o formato de uma dissertação argumentativa válida. Revise a estrutura e o conteúdo")
+
 
 });
 
@@ -126,12 +126,12 @@ test('deve escrever uma redação com dois parágrafos iguais e impedir o envio 
     await retryOnReload(page, async () => {
         await essaysWriting.essayTitle(essayData.redacoes.redacoes_invalidas.redacoes_repeticao_paragrafo[0].titulo);
         await essaysWriting.essayTextArea(essayData.redacoes.redacoes_invalidas.redacoes_repeticao_paragrafo[0].texto);
+        await essaysWriting.AiValidationButton();
+        await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso")
+        await AlertHandler.expectAlertMessage(page, "Repetição de frases desnecessária! Ocorrência: ")
     },
-        { maxRetries: 5 },
     );
-    await essaysWriting.AiValidationButton();
-    await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso")
-    await AlertHandler.expectAlertMessage(page, "Repetição de frases desnecessária! Ocorrência: ")
+
 
 });
 
@@ -146,41 +146,10 @@ test('deve escrever uma redação de outros gêneros textuais e enviar para corr
     await retryOnReload(page, async () => {
         await essaysWriting.essayTitle(essayData.redacoes.redacoes_validas.narrativo.conto[0].titulo);
         await essaysWriting.essayTextArea(essayData.redacoes.redacoes_validas.narrativo.conto[0].texto);
+        await essaysWriting.AiValidationButton();
+        await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso")
     },
-        { maxRetries: 5 },
     );
-    await essaysWriting.AiValidationButton();
-    await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso")
+
 });
 
-// test('deve digitalizar uma redação de boa qualidade utilizando OCR com sucesso', async () => {
-
-// });
-
-// test('deve tentar digitalizar uma redação de má qualidade utilizando OCR', async () => {
-
-// });
-
-// test('deve digitalizar uma redação com letra manuscrita utilizando OCR', async () => {
-
-// });
-
-// test('deve digitalizar uma redação com letra de forma utilizando OCR', async () => {
-
-// });
-
-// test('deve digitalizar uma redação com letra grande utilizando OCR', async () => {
-
-// });
-
-// test('deve digitalizar uma redação com letra pequena utilizando OCR', async () => {
-
-// });
-
-// test('deve digitalizar uma redação com letra de difícil compreenssão utilizando OCR', async () => {
-
-// });
-
-// test('deve digitalizar uma redação com termos rasurados utilizando OCR', async () => {
-
-// });

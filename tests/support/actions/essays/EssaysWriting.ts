@@ -27,4 +27,16 @@ export class EssaysWriting {
             .click()
     }
 
+    async digitizeEssay(imagePath: string) {
+        await this.page.getByRole('button', { name: 'Digitalizar redação' }).click();
+
+        const fileInput = this.page.locator('#inputFile');
+        await fileInput.setInputFiles(imagePath);
+        await this.page.getByRole('button', { name: 'Upload redação' }).click();
+        
+    }
+    async extractEssay() {
+        await this.page.getByRole('button', { name: 'Extrair redação' }).click(); 
+    }
+
 }

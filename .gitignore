@@ -7,4 +7,3 @@ node_modules/
 /playwright/.auth/
 .env
 
-tests/support/fixtures/data/ocr-samples/essays/
