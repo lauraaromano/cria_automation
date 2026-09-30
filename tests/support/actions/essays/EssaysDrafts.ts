@@ -61,6 +61,23 @@ export class EssayDrafts {
 
         await expect(linha).toBeVisible({ timeout: 10_000 })
 
-        await linha.locator('img').last().click()
+        const deleteIcon = linha.locator('div[data-field="id"] svg')
+        await deleteIcon.click()
+
+        await this.page.getByRole('button', { name: 'Excluir', exact: true }).click()
+    }
+
+    async openDraft() {
+        const generoParcial = this.genero.split(' - ').pop()?.trim() ?? this.genero
+
+        const linha = this.page
+            .locator('div[role="row"]')
+            .filter({ has: this.page.getByRole('button', { name: this.tema }) })
+            .filter({ has: this.page.locator('div[data-field="genero"]', { hasText: generoParcial }) })
+
+        await expect(linha).toBeVisible({ timeout: 10_000 })
+
+        const openIcon = linha.locator('div[data-field="professorCorrigiu"] svg')
+        await openIcon.click()
     }
 }
