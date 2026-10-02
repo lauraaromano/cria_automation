@@ -64,7 +64,7 @@ test('deve salvar uma redação narrativa sem correção detalhada', async ({ pa
         await essaysWriting.AiValidationButton();
     },
     );
-        await retryOnReload(page, async () => {
+    await retryOnReload(page, async () => {
      
         await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso")
         await AlertHandler.expectAlertMessage(page, "Redação validada com sucesso")
@@ -78,13 +78,7 @@ test('deve salvar uma redação narrativa sem correção detalhada', async ({ pa
     );
 });
 
-// test('deve salvar uma redação dissertativa com correção detalhada', async ({ page }) => {
 
-//     await retryOnReload(page, async () => {
-       
-//     },
-//     );
-// });
 
 
 
