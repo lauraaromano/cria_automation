@@ -12,7 +12,7 @@ test.beforeEach(async ({ page }) => {
     essaysPreparation = new Essays(page);
     essaysWriting = new EssaysWriting(page);
     await login.login(users.valid.email, users.valid.password);
-    await login.IsLoggedIn();
+    await login.IsLoggedIn(users.valid.name);
     await essaysPreparation.clickCreateEssay();
 });
 

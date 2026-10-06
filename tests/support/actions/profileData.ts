@@ -43,19 +43,24 @@ export class ProfileData {
         const estadoSelect = this.page
             .getByText('Estado')
             .locator('..')
-            .getByRole('combobox')
+            .getByRole('combobox');
 
-        await estadoSelect.click()
-        await this.page.getByRole('option', { name: estado }).click()
+        await estadoSelect.click();
 
-        const ciadadeSelect = this.page
+        const estadoOption = this.page.getByRole('option', { name: estado, exact: true });
+        await estadoOption.waitFor({ state: 'visible', timeout: 5000 });
+        await estadoOption.click();
+
+        const cidadeSelect = this.page
             .getByText('Cidade')
             .locator('..')
-            .getByRole('combobox')
+            .getByRole('combobox');
 
-        await ciadadeSelect.click()
-        await this.page.getByRole('option', { name: cidade }).click()
+        await cidadeSelect.click();
 
+        const cidadeOption = this.page.getByRole('option', { name: cidade, exact: true });
+        await cidadeOption.waitFor({ state: 'visible', timeout: 5000 });
+        await cidadeOption.click();
     }
 
     async editDateOfBirth(data: string) {
@@ -73,6 +78,28 @@ export class ProfileData {
             .locator('input[name="cursoAlmejado"]')
             .fill(course)
 
+    }
+
+    async editPassword(password: string) {
+        await this.page 
+            .locator('#senhaAtual')
+            .fill(password)
+    }
+
+    async editNewPassword(newpassword: string) {
+        await this.page 
+            .locator('#novaSenha')
+            .fill(newpassword)
+    }
+
+    async editConfirmPassword(confirmpassword: string) {
+        await this.page 
+            .locator('#confirmeSenha')
+            .fill(confirmpassword)
+    }
+    
+    async saveInfo() {
+        await this.page.getByRole("button", {name:" Salvar Informações "}).click()
     }
 
 }

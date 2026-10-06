@@ -8,7 +8,7 @@ test.beforeEach(async ({ page }) => {
 
 test('deve realizar login com credenciais válidas', async () => {
     await login.login(users.valid.email, users.valid.password);
-    await login.IsLoggedIn();
+    await login.IsLoggedIn(users.valid.name);
 });
 
 test('não deve realizar login com os campos de email e senha vazios', async ({ page }) => {

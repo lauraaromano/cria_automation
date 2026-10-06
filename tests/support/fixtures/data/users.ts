@@ -5,6 +5,12 @@ export const users = {
         password: process.env.TEST_USER_PASSWORD as string,
     },
 
+    otherValidUser: {
+        name: process.env.TEST_USER_NAME2 as string,
+        email: process.env.TEST_USER_EMAIL2 as string,
+        password: process.env.TEST_USER_PASSWORD2 as string,
+    },
+
     invalidEmail: {
         email: 'usuario.inexistente@teste.com',
     },
@@ -36,6 +42,7 @@ export const users = {
     },
     phone: {
         validPhone: '11987654321',
-        otherValidPhone: '13987654000'
+        otherValidPhone: '13987654000',
+        invalidPhone: '123'
     }
 };

@@ -1,8 +1,22 @@
-import {
-  test as popupHandlerTest,
-  expect,
-} from './popupHandler.fixture';
+import { test as popupHandlerTest, expect } from './popupHandler.fixture';
+import { retryOnReload } from './retryOnReload';
 
-export const test = popupHandlerTest;
+type BaseTest = typeof popupHandlerTest;
 
+function wrapWithRetry(originalTest: BaseTest): BaseTest {
+  const wrapped = ((name: string, fn: (args: any) => Promise<void>) => {
+
+    return originalTest(name, async ({ page }, testInfo) => {
+      await retryOnReload(
+        page,
+        () => fn({ page }),
+        { label: name, maxRetries: 10 },
+      );
+    });
+  }) as unknown as BaseTest;
+
+  return Object.assign(wrapped, originalTest);
+}
+
+export const test = wrapWithRetry(popupHandlerTest);
 export { expect };

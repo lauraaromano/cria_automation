@@ -16,7 +16,7 @@ test.beforeEach(async ({ page }) => {
     essayDraft = new EssayDrafts(page);
     essayCorrection = new EssayCorrection(page);
     await login.login(users.valid.email, users.valid.password);
-    await login.IsLoggedIn();
+    await login.IsLoggedIn(users.valid.name);
     await essaysPreparation.clickCreateEssay();
 });
 

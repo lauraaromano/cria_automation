@@ -2,11 +2,12 @@ import { Page, expect } from "@playwright/test"
 
 export const ErrorHandler = {
     async expectFieldError(page: Page, fieldLabel: string, message: string) {
+        const fieldContainer = page
+            .getByText(fieldLabel, { exact: true })
+            .locator('xpath=ancestor::div[contains(@class, "MuiFormControl-root")][1]');
+
         await expect(
-            page
-                .locator('.MuiFormControl-root')
-                .filter({ has: page.getByLabel(fieldLabel) })
-                .locator('.MuiFormHelperText-root.Mui-error')
+            fieldContainer.locator('.MuiFormHelperText-root.Mui-error')
         ).toHaveText(message);
     },
 };

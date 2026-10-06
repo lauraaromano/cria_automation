@@ -18,11 +18,11 @@ export class Login {
 
     }
 
-    async IsLoggedIn() {
+    async IsLoggedIn(name: string) {
         const header = this.page.getByRole('banner');
 
         await expect(
-            header.getByText(users.valid.name, { exact: true })
+            header.getByText(name, { exact: true })
         ).toBeVisible({ timeout: 10_000 });
     }
 
