@@ -1,6 +1,7 @@
 
 export { test, expect, } from './testWithRetry.fixture';
 export { retryOnReload, } from './retryOnReload';
+export { dismissPopupsNow } from './popupHandler.fixture';
 
 export { users, } from './data/users';
 import essaysData from './data/essays.json';

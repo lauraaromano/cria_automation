@@ -80,6 +80,21 @@ export class ProfileData {
 
     }
 
+    async editMainGoal(goal: string) {
+        const goalCombobox = this.page
+            .locator('form')
+            .getByRole('combobox')
+            .nth(2);
+
+        await goalCombobox.click();
+
+        await this.page.getByRole('option', {
+            name: goal,
+            exact: true,
+        }).click();
+    }
+
+
     async editPassword(password: string) {
         await this.page 
             .locator('#senhaAtual')

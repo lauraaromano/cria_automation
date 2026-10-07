@@ -34,7 +34,24 @@ async function dismiss(locator: Locator, name: string): Promise<void> {
 
     console.log(`[popupHandler] fechado: ${name}`);
   } catch {
-    // O popup pode ter desaparecido ou já ter sido fechado.
+  }
+}
+
+export async function dismissPopupsNow(
+  page: Page,
+  waitForAppear = 1500,
+): Promise<void> {
+  for (const rule of POPUP_RULES) {
+    const locator = rule.locator(page).first();
+
+    const appeared = await locator
+      .waitFor({ state: 'visible', timeout: waitForAppear })
+      .then(() => true)
+      .catch(() => false);
+
+    if (appeared) {
+      await dismiss(locator, rule.name);
+    }
   }
 }
 
