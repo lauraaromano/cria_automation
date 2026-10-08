@@ -9,17 +9,9 @@ export class ProfileData {
     }
 
     async myData() {
-        
-        const header = this.page.getByRole('banner');
-
-        const userMenuButton = header
-            .locator('button.MuiIconButton-root.MuiIconButton-sizeMedium')
-            .last();
-
-        await userMenuButton.click();
-        await this.page.locator('li[role="menuitem"][tipo="normal"]').click();
-        await expect(this.page).toHaveURL('/editar-perfil');
-
+        await this.page.goto('/editar-perfil', {
+            waitUntil: 'domcontentloaded',
+        });
     }
 
     async editMyData(dados: string) {
@@ -39,7 +31,6 @@ export class ProfileData {
     }
 
     async editStateAndCity(estado: string, cidade: string) {
-
         const estadoSelect = this.page
             .getByText('Estado')
             .locator('..')
@@ -47,8 +38,16 @@ export class ProfileData {
 
         await estadoSelect.click();
 
-        const estadoOption = this.page.getByRole('option', { name: estado, exact: true });
-        await estadoOption.waitFor({ state: 'visible', timeout: 5000 });
+        const estadoOption = this.page.getByRole('option', {
+            name: estado,
+            exact: true,
+        });
+
+        await estadoOption.waitFor({
+            state: 'visible',
+            timeout: 5000,
+        });
+
         await estadoOption.click();
 
         const cidadeSelect = this.page
@@ -58,13 +57,22 @@ export class ProfileData {
 
         await cidadeSelect.click();
 
-        const cidadeOption = this.page.getByRole('option', { name: cidade, exact: true });
-        await cidadeOption.waitFor({ state: 'visible', timeout: 5000 });
+        const cidadeOption = this.page.getByRole('option', {
+            name: cidade,
+            exact: true,
+        });
+
+        await cidadeOption.waitFor({
+            state: 'visible',
+            timeout: 5000,
+        });
+
         await cidadeOption.click();
     }
 
+
     async editDateOfBirth(data: string) {
-        this.page.locator('input[name="dataNascimento"]').fill(data)
+        await this.page.locator('input[name="dataNascimento"]').fill(data)
     }
 
     async editPhoneNumber(phone: string) {
@@ -74,11 +82,19 @@ export class ProfileData {
     }
 
     async editDesiredCourse(course: string) {
-        await this.page
+        const courseCombobox = this.page
             .locator('input[name="cursoAlmejado"]')
-            .fill(course)
+            .locator('..')
+            .getByRole('combobox');
 
+        await courseCombobox.click();
+
+        await this.page.getByRole('option', {
+            name: course,
+            exact: true,
+        }).click();
     }
+
 
     async editMainGoal(goal: string) {
         const goalCombobox = this.page

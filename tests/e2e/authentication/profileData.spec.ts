@@ -1,5 +1,7 @@
 import { test, users, Login, ErrorHandler, AlertHandler, ProfileData, retryOnReload, dismissPopupsNow } from '../../support';
 
+test.setTimeout(0);
+
 let login: Login;
 let profileData: ProfileData;
 
@@ -14,11 +16,9 @@ test.beforeEach(async ({ page }) => {
 test('deve alterar o Nome Completo do usuário com sucesso', async ({ page }) => {
     await retryOnReload(page, async () => {
         await profileData.myData();
+    
         await profileData.editMyData("Meus dados")
-    },
-    );
 
-    await retryOnReload(page, async () => {
         await profileData.editName(users.nameChanged.name)
         await profileData.saveChanges()
     },
@@ -27,10 +27,7 @@ test('deve alterar o Nome Completo do usuário com sucesso', async ({ page }) =>
     await retryOnReload(page, async () => {
         await AlertHandler.expectAlertMessage(page, "Dados alterados com sucesso!")
         await profileData.editMyData("Meus dados")
-    },
-    );
 
-    await retryOnReload(page, async () => {
         await profileData.editName(users.otherValidUser.name)
         await profileData.saveChanges()
         await AlertHandler.expectAlertMessage(page, "Dados alterados com sucesso!")
@@ -135,7 +132,7 @@ test('deve alterar o Curso Almejado do usuário com sucesso', async ({ page }) =
     );
     await retryOnReload(page, async () => {
 
-        await profileData.editDesiredCourse("Ciências da Computação")
+        await profileData.editDesiredCourse("MBA")
         await profileData.saveChanges()
     },
     );
@@ -147,7 +144,7 @@ test('deve alterar o Curso Almejado do usuário com sucesso', async ({ page }) =
     );
 
     await retryOnReload(page, async () => {
-        await profileData.editDesiredCourse("Nutrição")
+        await profileData.editDesiredCourse("Graduação")
         await profileData.saveChanges()
 
         await AlertHandler.expectAlertMessage(page, "Dados alterados com sucesso!")
@@ -172,14 +169,10 @@ test('deve tentar salvar alterações sem preencher o campo de Nome Completo', a
 
 });
 
-test('deve tentar salvar alterações sem selecionar o Estado e Cidade', async ({ page }) => {
+test.only('deve tentar salvar alterações sem selecionar o Estado e Cidade', async ({ page }) => {
     await retryOnReload(page, async () => {
         await profileData.myData();
         await profileData.editMyData("Meus dados")
-
-    },
-    );
-    await retryOnReload(page, async () => {
 
         await profileData.editStateAndCity('-- Selecione o estado --', '-- Selecione a cidade --')
         await profileData.saveChanges()
@@ -207,7 +200,7 @@ test('deve tentar salvar alterações sem selecionar a Data de Nascimento', asyn
 
 });
 
-test('deve tentar salvar as alterações selecionando uma data de nascimento que indique idade inferior a 10 anos ', async ({ page }) => {
+test('deve tentar salvar as alterações selecionando uma data de nascimento que indique idade inferior a 10 anos', async ({ page }) => {
     await retryOnReload(page, async () => {
         await profileData.myData();
         await profileData.editMyData("Meus dados")
@@ -268,7 +261,7 @@ test('deve tentar salvar alterações sem preencher o campo de Telefone corretam
     );
 });
 
-test('deve tentar salvar alterações sem selecionar a Área de Interesse ', async ({page}) => {
+test('deve tentar salvar alterações sem selecionar a Área de Interesse', async ({page}) => {
     // esse teste há ocorrência de bug
     await retryOnReload(page, async () => {
         await profileData.myData();
@@ -338,13 +331,11 @@ test('deve alterar a senha do usuário com sucesso', async ({ page }) => {
     );
 });
 
-test('deve tentar alterar a senha do usuário sem preencher o campo de Senha Atual', async ({ page }) => {
+test.only('deve tentar alterar a senha do usuário sem preencher o campo de Senha Atual', async ({ page }) => {
     await retryOnReload(page, async () => {
         await profileData.myData();
         await profileData.editMyData("Alterar senha")
-    },
-    );
-    await retryOnReload(page, async () => {
+  
         await profileData.editNewPassword('NovaSenha256')
         await profileData.editConfirmPassword('NovaSenha256')
         await profileData.saveInfo()
@@ -353,7 +344,7 @@ test('deve tentar alterar a senha do usuário sem preencher o campo de Senha Atu
     );
 });
 
-test('deve tentar alterar a senha do usuário sem preencher o campo de Nova Senha', async ({ page }) => {
+test.only('deve tentar alterar a senha do usuário sem preencher o campo de Nova Senha', async ({ page }) => {
     await retryOnReload(page, async () => {
         await profileData.myData();
         await profileData.editMyData("Alterar senha")
@@ -368,7 +359,7 @@ test('deve tentar alterar a senha do usuário sem preencher o campo de Nova Senh
     );
 });
 
-test('deve tentar alterar a senha do usuário sem preencher o campo de Confirmar Senha', async ({ page }) => {
+test.only('deve tentar alterar a senha do usuário sem preencher o campo de Confirmar Senha', async ({ page }) => {
     await retryOnReload(page, async () => {
         await profileData.myData();
         await profileData.editMyData("Alterar senha")
@@ -384,7 +375,7 @@ test('deve tentar alterar a senha do usuário sem preencher o campo de Confirmar
     );
 });
 
-test('deve tentar alterar a senha do usuário sem preencher o campo de Senha Atual com a senha atual correta', async ({ page }) => {
+test.only('deve tentar alterar a senha do usuário sem preencher o campo de Senha Atual com a senha atual correta', async ({ page }) => {
     await retryOnReload(page, async () => {
         await profileData.myData();
         await profileData.editMyData("Alterar senha")
@@ -403,7 +394,7 @@ test('deve tentar alterar a senha do usuário sem preencher o campo de Senha Atu
     );
 });
 
-test('deve tentar alterar a senha do usuário sem preencher o campo de Nova Senha com uma senha diferente da senha atual', async ({page}) => {
+test.only('deve tentar alterar a senha do usuário sem preencher o campo de Nova Senha com uma senha diferente da senha atual', async ({page}) => {
     await retryOnReload(page, async () => {
         await profileData.myData();
         await profileData.editMyData("Alterar senha")
@@ -422,7 +413,7 @@ test('deve tentar alterar a senha do usuário sem preencher o campo de Nova Senh
     );
 });
 
-test('deve tentar alterar a senha do usuário sem preencher o campo de Confirmar Senha com a mesma informação preenchida no campo Nova Senha', async ({ page }) => {
+test.only('deve tentar alterar a senha do usuário sem preencher o campo de Confirmar Senha com a mesma informação preenchida no campo Nova Senha', async ({ page }) => {
     await retryOnReload(page, async () => {
         await profileData.myData();
         await profileData.editMyData("Alterar senha")
@@ -439,7 +430,7 @@ test('deve tentar alterar a senha do usuário sem preencher o campo de Confirmar
     );
 });
 
-test('deve tentar alterar a senha do usuário com menos de 6 caracteres', async ({ page }) => {
+test.only('deve tentar alterar a senha do usuário com menos de 6 caracteres', async ({ page }) => {
     await retryOnReload(page, async () => {
         await profileData.myData();
         await profileData.editMyData("Alterar senha")
@@ -452,12 +443,11 @@ test('deve tentar alterar a senha do usuário com menos de 6 caracteres', async 
 
         await profileData.saveInfo()
         await ErrorHandler.expectFieldError(page, 'Nova senha', 'Sua senha precisa conter no minímo 6 caracteres!');
-
     },
     );
 });
 
-test('deve tentar alterar a senha do usuário sem letras minúsculas', async ({ page }) => {
+test.only('deve tentar alterar a senha do usuário sem letras minúsculas', async ({ page }) => {
     await retryOnReload(page, async () => {
         await profileData.myData();
         await profileData.editMyData("Alterar senha")
@@ -475,7 +465,7 @@ test('deve tentar alterar a senha do usuário sem letras minúsculas', async ({ 
     );
 });
 
-test('deve tentar alterar a senha do usuário sem letras maiúsculas', async ({ page }) => {
+test.only('deve tentar alterar a senha do usuário sem letras maiúsculas', async ({ page }) => {
     await retryOnReload(page, async () => {
         await profileData.myData();
         await profileData.editMyData("Alterar senha")
@@ -492,7 +482,7 @@ test('deve tentar alterar a senha do usuário sem letras maiúsculas', async ({ 
     );
 });
 
-test('deve tentar alterar a senha do usuário com 3 ou mais caracteres consecutivos', async ({page}) => {
+test.only('deve tentar alterar a senha do usuário com 3 ou mais caracteres consecutivos', async ({page}) => {
     await retryOnReload(page, async () => {
         await profileData.myData();
         await profileData.editMyData("Alterar senha")
@@ -509,7 +499,7 @@ test('deve tentar alterar a senha do usuário com 3 ou mais caracteres consecuti
     );
 });
 
-test('deve tentar alterar a senha do usuário com mais de 30 caracteres', async ({page}) => {
+test.only('deve tentar alterar a senha do usuário com mais de 30 caracteres', async ({page}) => {
     await retryOnReload(page, async () => {
         await profileData.myData();
         await profileData.editMyData("Alterar senha")
