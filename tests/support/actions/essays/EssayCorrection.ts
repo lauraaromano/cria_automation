@@ -25,43 +25,104 @@ export class EssayCorrection {
         return this.clickIfVisible('Quero deixar nota mil   ');
     }
 
-    async withoutDetailedCorrection(): Promise<boolean> {
-        return this.clickIfVisible(' Salvar sem correção detalhada');
-    }
+    async withoutDetailedCorrection() {
+        const button = this.page.getByRole('button', {
+            name: /sem correção detalhada|não quero correção detalhada/i,
+        });
 
-    async editGrade(): Promise<boolean> {
-        return this.clickIfVisible(' Editar nota correção simples');
-    }
+        const isVisible = await button
+            .isVisible({ timeout: 1000 })
+            .catch(() => false);
 
-    async goBack(): Promise<boolean> {
-        return this.clickIfVisible('Voltar para tela inicial');
-    }
-
-    async essayBoard(): Promise<boolean> {
-        const clicked = await this.clickIfVisible('Painel de redações ');
-        if (clicked) {
-            await expect(this.page).toHaveURL('/');
+        if (!isVisible) {
+            return false;
         }
-        return clicked;
+
+        await button.click();
+
+        return true;
     }
 
-    async closeMidia(): Promise<boolean> {
-        const closeIcon = this.page.getByTestId('CloseIcon');
-        const isVisible = await closeIcon.isVisible({ timeout: 3000 }).catch(() => false);
-        if (isVisible) {
-            await closeIcon.click();
-            console.log('[EssayCorrection] fechou mídia/modal');
-            return true;
+    async editGrade() {
+        const button = this.page.getByRole('button', {
+            name: /editar nota|alterar nota/i,
+        });
+
+        const isVisible = await button
+            .isVisible({ timeout: 1000 })
+            .catch(() => false);
+
+        if (!isVisible) {
+            return false;
         }
-        return false;
+
+        await button.click();
+
+        return true;
+    }
+
+
+    async goBack() {
+        const button = this.page.getByRole('button', {
+            name: 'Voltar para tela inicial',
+        });
+
+        const isVisible = await button
+            .isVisible({ timeout: 1000 })
+            .catch(() => false);
+
+        if (!isVisible) {
+            return false;
+        }
+
+        await button.click();
+
+        return true;
+    }
+
+    async essayBoard() {
+        const button = this.page.getByRole('button', {
+            name: /painel de redações/i,
+        });
+
+        const isVisible = await button
+            .isVisible({ timeout: 1000 })
+            .catch(() => false);
+
+        if (!isVisible) {
+            return false;
+        }
+
+        await button.click();
+
+        return true;
+    }
+
+    async closeMidia() {
+        const closeButton = this.page.getByTestId('CloseIcon');
+
+        const isVisible = await closeButton
+            .isVisible({ timeout: 1000 })
+            .catch(() => false);
+
+        if (!isVisible) {
+            return false;
+        }
+
+        await closeButton.click();
+
+        return true;
     }
 
     async narrativoCorrection(){
         await this.page.getByRole('button', { name: 'Usar 500 CRIA coins', exact: true }).click()
     }
 
-    async handlePostSubmissionFlow(): Promise<void> {
+    async simpleCorrection(){
+        await this.page.getByRole('button', { name: ' Editar nota correção simples', exact: true }).click()
+    }
 
+    async handlePostSubmissionFlow() {
         const allOptions: Array<() => Promise<boolean>> = [
             () => this.closeMidia(),
             () => this.withoutDetailedCorrection(),
@@ -77,6 +138,7 @@ export class EssayCorrection {
 
             for (const tryOption of allOptions) {
                 const clicked = await tryOption();
+
                 if (clicked) {
                     clickedSomething = true;
                     break;
@@ -86,6 +148,9 @@ export class EssayCorrection {
             if (!clickedSomething) {
                 break;
             }
+
+            await this.page.waitForTimeout(500);
         }
     }
+
 }

@@ -25,11 +25,14 @@ test('deve escrever uma redação estilo ENEM e enviar para correção com suces
     ), { maxRetries: 5 },);
 
     await retryOnReload(page, async () => {
+        await page.waitForTimeout(6000);
+
         await essaysWriting.essayTitle(essayData.redacoes.redacoes_validas.dissertativo.dissertativo_argumentativo[0].titulo);
         await essaysWriting.essayTextArea(essayData.redacoes.redacoes_validas.dissertativo.dissertativo_argumentativo[0].texto);
+
         await essaysWriting.AiValidationButton();
-        await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso")
-        await AlertHandler.expectAlertMessage(page, "Redação validada com sucesso")
+        await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso");
+        await AlertHandler.expectAlertMessage(page, "Redação validada com sucesso");
     },
     );
 
@@ -48,8 +51,8 @@ test('deve escrever uma redação com menos de 600 caracteres e impedir o envio 
         await essaysWriting.essayTitle(essayData.redacoes.redacoes_invalidas.redacoes_menos_600[0].titulo);
         await essaysWriting.essayTextArea(essayData.redacoes.redacoes_invalidas.redacoes_menos_600[0].texto);
         await essaysWriting.AiValidationButton();
-        await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso")
-        await AlertHandler.expectAlertMessage(page, "Tamanho mínimo da redação não atingido, escreva pelo menos 600 caracteres!")
+        await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso");
+        await AlertHandler.expectAlertMessage(page, "Tamanho mínimo da redação não atingido, escreva pelo menos 600 caracteres!");
     },
     );
 
@@ -68,8 +71,8 @@ test('deve tentar enviar uma redação sem conteúdo e impedir o envio para corr
         await essaysWriting.essayTitle(' ');
         await essaysWriting.essayTextArea(' ');
         await essaysWriting.AiValidationButton();
-        await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso")
-        await AlertHandler.expectAlertMessage(page, "Tamanho mínimo da redação não atingido, escreva pelo menos 600 caracteres!")
+        await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso");
+        await AlertHandler.expectAlertMessage(page, "Tamanho mínimo da redação não atingido, escreva pelo menos 600 caracteres!");
     },
     );
 
@@ -87,8 +90,8 @@ test('deve tentar enviar uma redação com o idioma inapropriado e impedir o env
         await essaysWriting.essayTitle(essayData.redacoes.redacoes_invalidas.redacoes_idioma_inapropriado[0].titulo);
         await essaysWriting.essayTextArea(essayData.redacoes.redacoes_invalidas.redacoes_idioma_inapropriado[0].texto);
         await essaysWriting.AiValidationButton();
-        await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso")
-        await AlertHandler.expectAlertMessage(page, "Idioma inapropriado! Ocorrência:")
+        await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso");
+        await AlertHandler.expectAlertMessage(page, "Idioma inapropriado! Ocorrência:");
     },
     );
 
@@ -107,8 +110,8 @@ test('deve escrever uma redação de texto aleatório/sem sentido e impedir o en
         await essaysWriting.essayTitle(essayData.redacoes.redacoes_invalidas.redacao_texto_aleatorio[0].titulo);
         await essaysWriting.essayTextArea(essayData.redacoes.redacoes_invalidas.redacao_texto_aleatorio[0].texto);
         await essaysWriting.AiValidationButton();
-        await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso")
-        await AlertHandler.expectAlertMessage(page, "Seu texto não segue o formato de uma dissertação argumentativa válida. Revise a estrutura e o conteúdo")
+        await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso");
+        await AlertHandler.expectAlertMessage(page, "Seu texto não segue o formato de uma dissertação argumentativa válida. Revise a estrutura e o conteúdo");
     },
     );
 
@@ -127,8 +130,8 @@ test('deve escrever uma redação com dois parágrafos iguais e impedir o envio 
         await essaysWriting.essayTitle(essayData.redacoes.redacoes_invalidas.redacoes_repeticao_paragrafo[0].titulo);
         await essaysWriting.essayTextArea(essayData.redacoes.redacoes_invalidas.redacoes_repeticao_paragrafo[0].texto);
         await essaysWriting.AiValidationButton();
-        await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso")
-        await AlertHandler.expectAlertMessage(page, "Repetição de frases desnecessária! Ocorrência: ")
+        await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso");
+        await AlertHandler.expectAlertMessage(page, "Repetição de frases desnecessária! Ocorrência: ");
     },
     );
 
@@ -147,7 +150,7 @@ test('deve escrever uma redação de outros gêneros textuais e enviar para corr
         await essaysWriting.essayTitle(essayData.redacoes.redacoes_validas.narrativo.conto[0].titulo);
         await essaysWriting.essayTextArea(essayData.redacoes.redacoes_validas.narrativo.conto[0].texto);
         await essaysWriting.AiValidationButton();
-        await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso")
+        await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso");
     },
     );
 

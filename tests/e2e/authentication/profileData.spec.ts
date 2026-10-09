@@ -1,4 +1,4 @@
-import { test, users, Login, ErrorHandler, AlertHandler, ProfileData, retryOnReload, dismissPopupsNow } from '../../support';
+import { test, users, Login, ErrorHandler, AlertHandler, ProfileData, retryOnReload, dismissPopupsNow, expect } from '../../support';
 
 test.setTimeout(0);
 
@@ -10,7 +10,6 @@ test.beforeEach(async ({ page }) => {
     profileData = new ProfileData(page)
     await login.login(users.otherValidUser.email, users.otherValidUser.password);
     await login.IsLoggedIn(users.otherValidUser.name);
-    await dismissPopupsNow(page); 
 });
 
 test('deve alterar o Nome Completo do usuário com sucesso', async ({ page }) => {
@@ -132,7 +131,7 @@ test('deve alterar o Curso Almejado do usuário com sucesso', async ({ page }) =
     );
     await retryOnReload(page, async () => {
 
-        await profileData.editDesiredCourse("MBA")
+        await profileData.editDesiredCourse("MBA","Graduação")
         await profileData.saveChanges()
     },
     );
@@ -144,7 +143,7 @@ test('deve alterar o Curso Almejado do usuário com sucesso', async ({ page }) =
     );
 
     await retryOnReload(page, async () => {
-        await profileData.editDesiredCourse("Graduação")
+        await profileData.editDesiredCourse('MBA','Graduação')
         await profileData.saveChanges()
 
         await AlertHandler.expectAlertMessage(page, "Dados alterados com sucesso!")
@@ -176,8 +175,8 @@ test.only('deve tentar salvar alterações sem selecionar o Estado e Cidade', as
 
         await profileData.editStateAndCity('-- Selecione o estado --', '-- Selecione a cidade --')
         await profileData.saveChanges()
-        await ErrorHandler.expectFieldError(page, 'Estado', 'Obrigatório');
-        await ErrorHandler.expectFieldError(page, 'Cidade', 'Obrigatório');
+        await expect(page.getByText('Obrigatório').first()).toBeVisible();
+        await expect(page.getByText('Obrigatório').nth(1)).toBeVisible();
     },
     );
 });

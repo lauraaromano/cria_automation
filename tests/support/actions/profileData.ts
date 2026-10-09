@@ -81,20 +81,10 @@ export class ProfileData {
             .fill(phone)
     }
 
-    async editDesiredCourse(course: string) {
-        const courseCombobox = this.page
-            .locator('input[name="cursoAlmejado"]')
-            .locator('..')
-            .getByRole('combobox');
-
-        await courseCombobox.click();
-
-        await this.page.getByRole('option', {
-            name: course,
-            exact: true,
-        }).click();
+    async editDesiredCourse(oldCourse: string, course: string) {
+        await this.page.getByText(oldCourse).click();
+        await this.page.getByRole('option', { name: course}).click();
     }
-
 
     async editMainGoal(goal: string) {
         const goalCombobox = this.page

@@ -273,12 +273,25 @@ export class Essays {
         return temaEscolhido;
     }
 
+    async urlPageWritingValidation() {
+        await expect(this.page).toHaveURL(/\/redacao\//);
+    }
+
+    async disabledButton() {
+        await expect(
+            this.page.getByRole('button', {
+                name: 'Começar nova redação'
+            })
+        ).toBeDisabled();
+    }
+
     async EssayPreparation(vestibular: string, result: string, tipo_texto: string, genero: string) {
         await this.selectVestibular(vestibular);
         await this.selectThemeFromResult(result);
         await this.selectTipoTexto(tipo_texto);
         await this.selectGeneroTextual(genero);
         await this.clickStartNewEssay();
+        await expect(this.page).toHaveURL(/\/redacao\//);
     }
 
 }

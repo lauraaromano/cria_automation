@@ -30,7 +30,7 @@ test('deve salvar um rascunho de uma redação dissertativa com sucesso', async 
         await essaysWriting.essayTitle(essayData.redacoes.redacoes_validas.dissertativo.dissertativo_argumentativo[0].titulo);
         await essaysWriting.essayTextArea(essayData.redacoes.redacoes_validas.dissertativo.dissertativo_argumentativo[0].texto);
 
-        await essayDraft.guardarTemaEGenero()
+        await essayDraft.guardarTemaEGenero();
 
         await essayDraft.draftSave();
 
@@ -39,13 +39,13 @@ test('deve salvar um rascunho de uma redação dissertativa com sucesso', async 
     },
     );
     await retryOnReload(page, async () => {
-        await essaysWriting.backToTheMainScreen()
-        await essaysWriting.sureToGoBack() 
+        await essaysWriting.backToTheMainScreen();
+        await essaysWriting.sureToGoBack();
 
     },);
 
     await retryOnReload(page, async () => {
-        await essayDraft.openDraftsTab()
+        await essayDraft.openDraftsTab();
     }, { recoveryButtonName: 'RASCUNHOS' });
 
 });
@@ -63,17 +63,17 @@ test('deve salvar um rascunho de uma redação narrativa com sucesso', async ({ 
         await essaysWriting.essayTitle(essayData.redacoes.redacoes_validas.narrativo.Relato[0].titulo);
         await essaysWriting.essayTextArea(essayData.redacoes.redacoes_validas.narrativo.Relato[0].texto);
 
-        await essayDraft.guardarTemaEGenero()
+        await essayDraft.guardarTemaEGenero();
 
         await essayDraft.draftSave();
 
-        await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso")
+        await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso");
 
     },
     );
     await retryOnReload(page, async () => {
-        await essaysWriting.backToTheMainScreen()
-        await essaysWriting.sureToGoBack()
+        await essaysWriting.backToTheMainScreen();
+        await essaysWriting.sureToGoBack();
     },);
   
     await retryOnReload(page, async () => {
@@ -98,27 +98,27 @@ test('deve excluir um rascunho de uma redação dissertativa com sucesso', async
         await essaysWriting.essayTitle(essayData.redacoes.redacoes_validas.dissertativo.carta_aberta[0].titulo);
         await essaysWriting.essayTextArea(essayData.redacoes.redacoes_validas.dissertativo.carta_aberta[0].texto);
 
-        await essayDraft.guardarTemaEGenero()
+        await essayDraft.guardarTemaEGenero();
 
         await essayDraft.draftSave();
 
-        await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso")
+        await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso");
     }, );
 
     await retryOnReload(page, async () => {
-        await essaysWriting.backToTheMainScreen()
-        await essaysWriting.sureToGoBack()
+        await essaysWriting.backToTheMainScreen();
+        await essaysWriting.sureToGoBack();
     }, );
 
     await retryOnReload(page, async () => {
-        await essayDraft.openDraftsTab()
-        await essayDraft.verificarTemaEGenero()
+        await essayDraft.openDraftsTab();
+        await essayDraft.verificarTemaEGenero();
 
     }, { recoveryButtonName: 'RASCUNHOS' });
 
     await retryOnReload(page, async () => {
-        await essayDraft.deleteDraft()
-        await AlertHandler.expectAlertMessage(page, "Rascunho excluído com sucesso!")
+        await essayDraft.deleteDraft();
+        await AlertHandler.expectAlertMessage(page, "Rascunho excluído com sucesso!");
 
     }, { recoveryButtonName: 'RASCUNHOS' });
 
@@ -138,26 +138,26 @@ test('deve excluir um rascunho de uma redação narrativa com sucesso', async ({
         await essaysWriting.essayTitle(essayData.redacoes.redacoes_validas.narrativo.notícia[0].titulo);
         await essaysWriting.essayTextArea(essayData.redacoes.redacoes_validas.narrativo.notícia[0].texto);
 
-        await essayDraft.guardarTemaEGenero()
+        await essayDraft.guardarTemaEGenero();
 
         await essayDraft.draftSave();
 
-        await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso")
+        await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso");
 
     },
     );
 
     await retryOnReload(page, async () => {
-        await essaysWriting.backToTheMainScreen()
-        await essaysWriting.sureToGoBack()
+        await essaysWriting.backToTheMainScreen();
+        await essaysWriting.sureToGoBack();
     },
     );
 
     await retryOnReload(page, async () => {
-        await essayDraft.openDraftsTab()
-        await essayDraft.verificarTemaEGenero()
-        await essayDraft.deleteDraft()
-        await AlertHandler.expectAlertMessage(page, "Rascunho excluído com sucesso!")
+        await essayDraft.openDraftsTab();
+        await essayDraft.verificarTemaEGenero();
+        await essayDraft.deleteDraft();
+        await AlertHandler.expectAlertMessage(page, "Rascunho excluído com sucesso!");
 
     }, { recoveryButtonName: 'RASCUNHOS' });
 });
@@ -175,33 +175,33 @@ test('deve abrir um rascunho de uma redação dissertativa com sucesso', async (
         await essaysWriting.essayTitle(essayData.redacoes.redacoes_validas.dissertativo.editorial[0].titulo);
         await essaysWriting.essayTextArea(essayData.redacoes.redacoes_validas.dissertativo.editorial[0].texto);
 
-        await essayDraft.guardarTemaEGenero()
+        await essayDraft.guardarTemaEGenero();
 
         await essayDraft.draftSave();
 
-        await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso")
+        await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso");
 
 
     },
     );
 
     await retryOnReload(page, async () => {
-        await essaysWriting.backToTheMainScreen()
-        await essaysWriting.sureToGoBack()
+        await essaysWriting.backToTheMainScreen();
+        await essaysWriting.sureToGoBack();
     }, );
 
     await retryOnReload(page, async () => {
-        await essayDraft.openDraftsTab()
-        await essayDraft.verificarTemaEGenero()
-        await essayDraft.openDraft()
+        await essayDraft.openDraftsTab();
+        await essayDraft.verificarTemaEGenero();
+        await essayDraft.openDraft();
 
-        await essaysWriting.backToTheMainScreen()
-        await essaysWriting.sureToGoBack()
+        await essaysWriting.backToTheMainScreen();
+        await essaysWriting.sureToGoBack();
 
-        await essayDraft.openDraftsTab()
-        await essayDraft.verificarTemaEGenero()
-        await essayDraft.deleteDraft()
-        await AlertHandler.expectAlertMessage(page, "Rascunho excluído com sucesso!")
+        await essayDraft.openDraftsTab();
+        await essayDraft.verificarTemaEGenero();
+        await essayDraft.deleteDraft();
+        await AlertHandler.expectAlertMessage(page, "Rascunho excluído com sucesso!");
 
     }, { recoveryButtonName: 'RASCUNHOS' });
 });
@@ -219,32 +219,32 @@ test('deve abrir um rascunho de uma redação narrativa com sucesso', async ({ p
         await essaysWriting.essayTitle(essayData.redacoes.redacoes_validas.narrativo.crônica[0].titulo);
         await essaysWriting.essayTextArea(essayData.redacoes.redacoes_validas.narrativo.crônica[0].texto);
 
-        await essayDraft.guardarTemaEGenero()
+        await essayDraft.guardarTemaEGenero();
 
         await essayDraft.draftSave();
 
-        await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso")
+        await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso");
 
-        await essaysWriting.backToTheMainScreen()
-        await essaysWriting.sureToGoBack()
+        await essaysWriting.backToTheMainScreen();
+        await essaysWriting.sureToGoBack();
     },
     );
     await retryOnReload(page, async () => {
-        await essayDraft.openDraftsTab()
-        await essayDraft.verificarTemaEGenero()
-        await essayDraft.openDraft()
+        await essayDraft.openDraftsTab();
+        await essayDraft.verificarTemaEGenero();
+        await essayDraft.openDraft();
     }, { recoveryButtonName: 'RASCUNHOS' });
 
     await retryOnReload(page, async () => {
-        await essaysWriting.backToTheMainScreen()
-        await essaysWriting.sureToGoBack()
+        await essaysWriting.backToTheMainScreen();
+        await essaysWriting.sureToGoBack();
     }, );
 
      await retryOnReload(page, async () => {
-        await essayDraft.openDraftsTab()
-        await essayDraft.verificarTemaEGenero()
-        await essayDraft.deleteDraft()
-        await AlertHandler.expectAlertMessage(page, "Rascunho excluído com sucesso!")
+        await essayDraft.openDraftsTab();
+        await essayDraft.verificarTemaEGenero();
+        await essayDraft.deleteDraft();
+        await AlertHandler.expectAlertMessage(page, "Rascunho excluído com sucesso!");
     }, );   
 });
 

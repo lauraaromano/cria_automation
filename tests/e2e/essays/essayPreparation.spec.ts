@@ -20,6 +20,7 @@ test('deve criar uma redação estilo Enem com sucesso', async () => {
     await essays.selectTipoTexto(essayData.tipo_texto[0]);
     await essays.selectGeneroTextual(essayData.genero_textual.dissertativo[0]);
     await essays.clickStartNewEssay();
+    await essays.urlPageWritingValidation();
 });
 
 test('deve criar uma redação com Outros Gêneros (Dissertativo) com sucesso', async () => {
@@ -28,6 +29,8 @@ test('deve criar uma redação com Outros Gêneros (Dissertativo) com sucesso', 
     await essays.selectTipoTexto(essayData.tipo_texto[0]);
     await essays.selectGeneroTextual(essayData.genero_textual.dissertativo[1]);
     await essays.clickStartNewEssay();
+    await essays.urlPageWritingValidation();
+
 });
 
 test('deve criar uma redação com Outros Gêneros (Narrativo) com sucesso', async () => {
@@ -36,6 +39,8 @@ test('deve criar uma redação com Outros Gêneros (Narrativo) com sucesso', asy
     await essays.selectTipoTexto(essayData.tipo_texto[1]);
     await essays.selectGeneroTextual(essayData.genero_textual.narrativo[3]);
     await essays.clickStartNewEssay();
+    await essays.urlPageWritingValidation();
+
 });
 
 test('deve selecinar um tema de redação através da Busca por palavra chave de um tema existente', async () => {
@@ -43,6 +48,8 @@ test('deve selecinar um tema de redação através da Busca por palavra chave de
     await essays.selectTipoTexto(essayData.tipo_texto[1]);
     await essays.selectGeneroTextual(essayData.genero_textual.narrativo[0]);
     await essays.clickStartNewEssay();
+    await essays.urlPageWritingValidation();
+
 });
 
 test('deve selecinar um tema de redação através da Busca por palavra Chave de um tema inexistente', async () => {
@@ -57,6 +64,8 @@ test('deve selecinar um vestibular existente como filtro', async () => {
     await essays.selectTipoTexto(essayData.tipo_texto[0]);
     await essays.selectGeneroTextual(essayData.genero_textual.dissertativo[2]);
     await essays.clickStartNewEssay();
+    await essays.urlPageWritingValidation();
+
 });
 
 test('deve selecinar uma área existente como filtro', async () => {
@@ -65,15 +74,21 @@ test('deve selecinar uma área existente como filtro', async () => {
     await essays.selectTipoTexto(essayData.tipo_texto[1]);
     await essays.selectGeneroTextual(essayData.genero_textual.narrativo[3]);
     await essays.clickStartNewEssay();
+    await essays.urlPageWritingValidation();
+
 });
 
-test('deve selecinar uma área e um vestibular existente como filtro', async () => {
-    await essays.selectVestibular(essayData.vestibulares[10]);
+test('deve selecinar uma área e um vestibular existente como filtro', async ({page}) => {
     await essays.selectArea(essayData.areas[6]);
+    await essays.selectVestibular(essayData.vestibulares[10]);
+
     await essays.selectRandomThemeFromResult();
+
     await essays.selectTipoTexto(essayData.tipo_texto[1]);
     await essays.selectGeneroTextual(essayData.genero_textual.narrativo[1]);
     await essays.clickStartNewEssay();
+    await essays.urlPageWritingValidation();
+
 });
 
 test('deve selecinar um tema de redação através de Outros', async () => {
@@ -81,6 +96,8 @@ test('deve selecinar um tema de redação através de Outros', async () => {
     await essays.selectTipoTexto(essayData.tipo_texto[0]);
     await essays.selectGeneroTextual(essayData.genero_textual.dissertativo[5]);
     await essays.clickStartNewEssay();
+    await essays.urlPageWritingValidation();
+
 });
 
 test('deve selecinar um tema de redação através do Tema da semana', async () => {
@@ -88,5 +105,23 @@ test('deve selecinar um tema de redação através do Tema da semana', async () 
     await essays.selectTipoTexto(essayData.tipo_texto[1]);
     await essays.selectGeneroTextual(essayData.genero_textual.narrativo[1]);
     await essays.clickStartNewEssay();
+    await essays.urlPageWritingValidation();
+
 });
 
+test('deve tentar prosseguir com a preparação da redação sem selecionar nenhum campo', async () => {
+    await essays.disabledButton();
+});
+
+test('após ter selecionado um tema de redação, deve tentar prosseguir com a preparação da redação sem selecionar nenhum campo', async () => {
+    await essays.selectSearchByKeyword("A linguagem neutra em debate no Brasil");
+
+    await essays.disabledButton();
+});
+
+test('após ter selecionado um tema de redação e um Tipo de texto, deve tentar prosseguir com a preparação da redação sem selecionar nenhum campo', async () => {
+    await essays.selectSearchByKeyword("A linguagem neutra em debate no Brasil");
+    await essays.selectTipoTexto(essayData.tipo_texto[1]);
+
+    await essays.disabledButton();
+});

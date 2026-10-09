@@ -22,12 +22,12 @@ test('não deve realizar login com email válido e senha inválida', async ({ pa
     await AlertHandler.expectAlertMessage(page, 'Senha inválida!');
 });
 
-test('não deve realizar login com usuário inválido e senha válida', async ({ page }) => {
+test('não deve realizar login com email inválido e senha válida', async ({ page }) => {
     await login.login(users.invalidEmail.email, users.valid.password);
     await AlertHandler.expectAlertMessage(page, 'Usuário não encontrado!');
 });
 
-test('não deve realizar login quando o campo de usuário estiver vazio', async ({ page }) => {
+test('não deve realizar login quando o campo de email estiver vazio', async ({ page }) => {
     await login.login('', users.valid.password);
     await ErrorHandler.expectFieldError(page, 'E-mail ou CPF:', 'Obrigatório');
 });
