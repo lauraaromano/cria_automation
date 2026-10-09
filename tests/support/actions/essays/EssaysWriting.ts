@@ -1,5 +1,4 @@
 import { Page, expect } from "@playwright/test"
-import { essays } from "../../fixtures";
 
 async function skipIfAlreadyDone(page: Page, doneMarkerText: string, exact = true): Promise<boolean> {
     return await page.getByText(doneMarkerText, { exact }).isVisible({ timeout: 1000 }).catch(() => false);
@@ -21,7 +20,7 @@ export class EssaysWriting {
 
     }
 
-    async AiValidationButton(){
+    async aiValidationButton(){
         await this.page
             .getByRole('button', { name: 'Avaliar redação com IA  ' })
             .click()

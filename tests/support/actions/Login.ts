@@ -1,5 +1,4 @@
 import { Page, expect } from "@playwright/test"
-import { users } from '../fixtures';
 
 export class Login {
     page: Page

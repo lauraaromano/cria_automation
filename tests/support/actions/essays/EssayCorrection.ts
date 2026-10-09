@@ -37,9 +37,7 @@ export class EssayCorrection {
         if (!isVisible) {
             return false;
         }
-
         await button.click();
-
         return true;
     }
 
@@ -114,7 +112,7 @@ export class EssayCorrection {
         return true;
     }
 
-    async narrativoCorrection(){
+    async narrativeCorrection(){
         await this.page.getByRole('button', { name: 'Usar 500 CRIA coins', exact: true }).click()
     }
 

@@ -32,7 +32,7 @@ test('deve salvar uma redação dissertativa sem correção detalhada', async ({
     await retryOnReload(page, async () => {
         await essaysWriting.essayTitle(essayData.redacoes.redacoes_validas.dissertativo.dissertativo_argumentativo[0].titulo);
         await essaysWriting.essayTextArea(essayData.redacoes.redacoes_validas.dissertativo.dissertativo_argumentativo[0].texto);
-        await essaysWriting.AiValidationButton();
+        await essaysWriting.aiValidationButton();
     },
     );
     await retryOnReload(page, async () => {
@@ -61,7 +61,7 @@ test('deve salvar uma redação narrativa sem correção detalhada', async ({ pa
     await retryOnReload(page, async () => {
         await essaysWriting.essayTitle(essayData.redacoes.redacoes_validas.narrativo.crônica[0].titulo);
         await essaysWriting.essayTextArea(essayData.redacoes.redacoes_validas.narrativo.crônica[0].texto);
-        await essaysWriting.AiValidationButton();
+        await essaysWriting.aiValidationButton();
     },
     );
     await retryOnReload(page, async () => {
@@ -69,7 +69,7 @@ test('deve salvar uma redação narrativa sem correção detalhada', async ({ pa
         await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso");
         await AlertHandler.expectAlertMessage(page, "Redação validada com sucesso");
         
-        await essayCorrection.narrativoCorrection();
+        await essayCorrection.narrativeCorrection();
         await AlertHandler.expectAlertMessage(page, "Redação enviada para processamento!");
 
         

@@ -1,9 +1,4 @@
-import {
-  test as base,
-  expect,
-  type Page,
-  type Locator,
-} from '@playwright/test';
+import {test as base,expect,type Page,type Locator,} from '@playwright/test';
 
 type PopupRule = {
   name: string;

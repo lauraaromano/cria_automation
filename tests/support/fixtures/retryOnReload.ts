@@ -1,5 +1,12 @@
 import type { Page } from '@playwright/test';
 
+/**
+ * Executa um fluxo de teste e tenta novamente quando ocorre uma falha,
+ * como reload inesperado, timeout ou erro de interação com a página.
+ * Também permite recuperar a tela clicando em um elemento informado
+ * antes de iniciar uma nova tentativa.
+ */
+
 export type RetryOptions = {
     maxRetries?: number;
     label?: string;

@@ -174,7 +174,14 @@ export class Essays {
 
         await chosen.click();
     }
-
+    async noThemes() {
+            await expect(
+                this.page.getByText(
+                    'Não há temas cadastrados para esse vestibular e essa área.',
+                    { exact: true },
+                ),
+            ).toBeVisible();
+    }
     async goToRandomThemePageAndSelect() {
 
         if (await skipIfAlreadyDone(this.page, 'Tema Escolhido')) return;

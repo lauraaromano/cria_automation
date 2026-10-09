@@ -1,5 +1,4 @@
-import { Page, expect } from "@playwright/test"
-import { users } from '../fixtures';
+import { Page } from "@playwright/test"
 
 export class ProfileData {
     page: Page
