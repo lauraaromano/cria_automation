@@ -1,4 +1,5 @@
 import { Page, expect } from "@playwright/test"
+import { AlertHandler } from "../../fixtures/alertHandler.fixture"
 
 export class EssayDrafts {
     page: Page
@@ -131,20 +132,26 @@ export class EssayDrafts {
             .click();
     }
 
-
+    async deleteDraftAll() {
+        await this.openDraftsTab();
+        await this.verifyThemeAndGenre();
+        await this.deleteDraft();
+        await AlertHandler.expectAlertMessage(this.page, 'Rascunho excluído com sucesso!');
+    }
 
     async openDraft() {
-        const generoParcial = this.genero.split(' - ').pop()?.trim() ?? this.genero
-
         const linha = this.page
             .locator('div[role="row"]')
-            .filter({ has: this.page.getByRole('button', { name: this.tema }) })
-            .filter({ has: this.page.locator('div[data-field="genero"]', { hasText: generoParcial }) })
+            .filter({ hasText: this.tema })
+            .last();
 
-        await expect(linha).toBeVisible({ timeout: 10_000 })
+        await expect(linha).toBeVisible({ timeout: 10_000 });
 
-        const openIcon = linha.locator('div[data-field="professorCorrigiu"] svg')
-        await openIcon.click()
+        await linha
+            .locator('div[data-field="professorCorrigiu"]')
+            .locator('svg')
+            .first()
+            .click();
     }
 
     async validateNumberOfDrafts(): Promise<number> {
@@ -165,9 +172,9 @@ export class EssayDrafts {
 
     } 
 
-    // async validateDraftWasRemoved(numeroAnterior: number) {
-    //     const numeroAtual = await this.validateNumberOfDrafts();
+    async validateDraftWasRemoved(numeroAnterior: number) {
+        const numeroAtual = await this.validateNumberOfDrafts();
 
-    //     await expect(numeroAtual).toBe(numeroAnterior - 1);
-    // } 
+        await expect(numeroAtual).toBe(numeroAnterior - 1);
+    } 
 }

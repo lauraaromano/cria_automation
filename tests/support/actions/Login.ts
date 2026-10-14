@@ -17,7 +17,7 @@ export class Login {
 
     }
 
-    async IsLoggedIn(name: string) {
+    async isLoggedIn(name: string) {
         const header = this.page.getByRole('banner');
 
         await expect(
@@ -25,7 +25,7 @@ export class Login {
         ).toBeVisible({ timeout: 10_000 });
     }
 
-    async Logout() {
+    async logout() {
         const header = this.page.getByRole('banner');
 
         const userMenuButton = header

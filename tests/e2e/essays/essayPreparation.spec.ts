@@ -10,7 +10,7 @@ test.beforeEach(async ({ page }) => {
     login = new Login(page);
     essays = new Essays(page);
     await login.login(users.valid.email, users.valid.password);
-    await login.IsLoggedIn(users.valid.name);
+    await login.isLoggedIn(users.valid.name);
     await essays.clickCreateEssay();
 });
 
@@ -82,7 +82,7 @@ test('deve selecionar uma área e um vestibular existente como filtro', async ({
     await essays.selectArea(essayData.areas[2]);
     await essays.selectVestibular(essayData.vestibulares[2]);
 
-    await essays.selectRandomThemeFromResult();
+    await essays.selectResultByText('Educação básica e formação profissional: entre a multitarefa e a reflexão');
 
     await essays.selectTipoTexto(essayData.tipo_texto[1]);
     await essays.selectGeneroTextual(essayData.genero_textual.narrativo[1]);

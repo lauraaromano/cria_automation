@@ -1,4 +1,6 @@
-import { Page, expect } from "@playwright/test"
+import { Page } from "@playwright/test"
+import { AlertHandler } from "../../fixtures/alertHandler.fixture"
+import { EssayDrafts } from "./EssaysDrafts"
 
 async function skipIfAlreadyDone(page: Page, doneMarkerText: string, exact = true): Promise<boolean> {
     return await page.getByText(doneMarkerText, { exact }).isVisible({ timeout: 1000 }).catch(() => false);
@@ -35,4 +37,22 @@ export class EssaysWriting {
 
     }
 
+    async essayWriting(titulo: string, texto: string, essayDraft: EssayDrafts) {
+        await this.essayTitle(titulo);
+        await this.essayTextArea(texto);
+        await essayDraft.saveThemeAndGenre();
+        await essayDraft.draftSave();
+        await AlertHandler.expectAlertMessage(this.page, 'Redação salva com sucesso');
+    }
+
+    async essayWritingAndValidateWithAI(titulo: string, texto: string) {
+        await this.essayTitle(titulo);
+        await this.essayTextArea(texto);
+        await this.aiValidationButton();
+    }
+
+    async backToMain() {
+        await this.backToTheMainScreen();
+        await this.sureToGoBack();
+    }
 }

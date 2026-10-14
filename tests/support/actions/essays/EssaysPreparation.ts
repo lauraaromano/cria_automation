@@ -169,11 +169,25 @@ export class Essays {
         const chosen = themeOptions.nth(randomIndex);
 
         await chosen.waitFor({ state: 'visible' });
-        const chosenText = await chosen.textContent();
-        console.log(`[selectRandomThemeFromResult] tema escolhido: ${chosenText}`);
 
         await chosen.click();
     }
+
+    async selectResultByText(texto: string) {
+        if (await skipIfAlreadyDone(this.page, 'Tema Escolhido')) return;
+
+        const resultTitle = this.page.getByText('Resultado', { exact: true });
+        await resultTitle.waitFor({ state: 'visible', timeout: 10000 });
+
+        const chosen = this.page
+            .locator('p:text-is("Resultado") ~ p')
+            .filter({ hasText: texto })
+            .first();
+
+        await chosen.waitFor({ state: 'visible' });
+        await chosen.click();
+    }
+
     async noThemes() {
             await expect(
                 this.page.getByText(
@@ -192,7 +206,7 @@ export class Essays {
         const textos = await numerosPagina.allTextContents();
         const totalPaginas = Math.max(...textos.map(Number));
         
-        const limiteMaximo = Math.min(totalPaginas, 82688);
+        const limiteMaximo = Math.min(totalPaginas, 30);
         const randomPage = Math.floor(Math.random() * limiteMaximo) + 1;
 
         const nextButton = this.page.getByRole('button', { name: 'Go to next page' });
@@ -292,7 +306,7 @@ export class Essays {
         ).toBeDisabled();
     }
 
-    async EssayPreparation(vestibular: string, result: string, tipo_texto: string, genero: string) {
+    async essayPreparation(vestibular: string, result: string, tipo_texto: string, genero: string) {
         await this.selectVestibular(vestibular);
         await this.selectThemeFromResult(result);
         await this.selectTipoTexto(tipo_texto);

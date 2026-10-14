@@ -9,7 +9,7 @@ test.beforeEach(async ({ page }) => {
     login = new Login(page);
     profileData = new ProfileData(page)
     await login.login(users.otherValidUser.email, users.otherValidUser.password);
-    await login.IsLoggedIn(users.otherValidUser.name);
+    await login.isLoggedIn(users.otherValidUser.name);
 });
 
 test('deve alterar o Nome Completo do usuário com sucesso', async ({ page }) => {

@@ -16,12 +16,12 @@ test.beforeEach(async ({ page }) => {
     essayDraft = new EssayDrafts(page);
     essayCorrection = new EssayCorrection(page);
     await login.login(users.valid.email, users.valid.password);
-    await login.IsLoggedIn(users.valid.name);
+    await login.isLoggedIn(users.valid.name);
     await essaysPreparation.clickCreateEssay();
 });
 
 test('deve salvar uma redação dissertativa sem correção detalhada', async ({ page }) => {
-    await retryOnReload(page, () => essaysPreparation.EssayPreparation(
+    await retryOnReload(page, () => essaysPreparation.essayPreparation(
         essayData.vestibulares[0],
         essayData.temas_redacao.enem[6],
         essayData.tipo_texto[0],
@@ -29,12 +29,11 @@ test('deve salvar uma redação dissertativa sem correção detalhada', async ({
     ),
     );
 
-    await retryOnReload(page, async () => {
-        await essaysWriting.essayTitle(essayData.redacoes.redacoes_validas.dissertativo.dissertativo_argumentativo[0].titulo);
-        await essaysWriting.essayTextArea(essayData.redacoes.redacoes_validas.dissertativo.dissertativo_argumentativo[0].texto);
-        await essaysWriting.aiValidationButton();
-    },
-    );
+    await retryOnReload(page, () => essaysWriting.essayWritingAndValidateWithAI(
+        essayData.redacoes.redacoes_validas.dissertativo.dissertativo_argumentativo[0].titulo,
+        essayData.redacoes.redacoes_validas.dissertativo.dissertativo_argumentativo[0].texto,
+    ));
+
     await retryOnReload(page, async () => {
      
         await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso")
@@ -51,19 +50,19 @@ test('deve salvar uma redação dissertativa sem correção detalhada', async ({
 
 test('deve salvar uma redação narrativa sem correção detalhada', async ({ page }) => {
 
-    await retryOnReload(page, () => essaysPreparation.EssayPreparation(
+    await retryOnReload(page, () => essaysPreparation.essayPreparation(
         essayData.vestibulares[0],
         essayData.temas_redacao.enem[0],
         essayData.tipo_texto[1],
         essayData.genero_textual.narrativo[0],
     ),
     );
-    await retryOnReload(page, async () => {
-        await essaysWriting.essayTitle(essayData.redacoes.redacoes_validas.narrativo.crônica[0].titulo);
-        await essaysWriting.essayTextArea(essayData.redacoes.redacoes_validas.narrativo.crônica[0].texto);
-        await essaysWriting.aiValidationButton();
-    },
-    );
+    
+    await retryOnReload(page, () => essaysWriting.essayWritingAndValidateWithAI(
+        essayData.redacoes.redacoes_validas.narrativo.crônica[0].titulo,
+        essayData.redacoes.redacoes_validas.narrativo.crônica[0].texto,
+    ));
+
     await retryOnReload(page, async () => {
      
         await AlertHandler.expectAlertMessage(page, "Redação salva com sucesso");
