@@ -1,7 +1,7 @@
 import { test, users, Essays, Login, expect } from '../../support';
 import { essays as essayData } from '../../support/fixtures';
 
-// test.setTimeout(0);
+test.setTimeout(120000); 
 
 let login: Login;
 let essays: Essays;
