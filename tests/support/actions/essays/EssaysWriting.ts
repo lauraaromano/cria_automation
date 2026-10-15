@@ -1,4 +1,4 @@
-import { Page } from "@playwright/test"
+import { Page, expect } from "@playwright/test"
 import { AlertHandler } from "../../fixtures/alertHandler.fixture"
 import { EssayDrafts } from "./EssaysDrafts"
 
@@ -45,11 +45,36 @@ export class EssaysWriting {
         await AlertHandler.expectAlertMessage(this.page, 'Redação salva com sucesso');
     }
 
-    async essayWritingAndValidateWithAI(titulo: string, texto: string) {
-        await this.essayTitle(titulo);
-        await this.essayTextArea(texto);
-        await this.aiValidationButton();
+    async essayWritingAndValidateWithAI(
+        titulo: string,
+        texto: string,
+        essayInformation: {
+            tipo: string
+            genero: string
+            tema: string
+        }
+    ) {
+        await this.essayTitle(titulo)
+        await this.essayTextArea(texto)
+
+        const typeAndGenre = `${essayInformation.tipo} - ${essayInformation.genero}`
+
+        await expect(
+            this.page.getByText(typeAndGenre, { exact: true })
+        ).toBeVisible({
+            timeout: 20_000
+        })
+
+        await expect(
+            this.page.getByText(essayInformation.tema, { exact: true })
+        ).toBeVisible({
+            timeout: 20_000
+        })
+
+        await this.aiValidationButton()
     }
+
+
 
     async backToMain() {
         await this.backToTheMainScreen();

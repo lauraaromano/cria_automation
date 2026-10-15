@@ -1,6 +1,6 @@
 import { test, expect, users, essays as essayData, retryOnReload, AlertHandler, Essays, EssaysWriting, Login, EssayDrafts } from '../../support';
 
-// test.setTimeout(200000);
+test.setTimeout(200000);
 
 let login: Login;
 let essaysPreparation: Essays;
