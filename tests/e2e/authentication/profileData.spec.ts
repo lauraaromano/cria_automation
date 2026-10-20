@@ -14,6 +14,7 @@ test.beforeEach(async ({ page }) => {
 
 test('deve alterar o Nome Completo do usuário com sucesso', async ({ page }) => {
     await retryOnReload(page, async () => {
+
         await profileData.myData();
     
         await profileData.editMyData("Meus dados");
@@ -293,13 +294,13 @@ test('deve alterar a senha do usuário com sucesso', async ({ page }) => {
     );
     await retryOnReload(page, async () => {
         await AlertHandler.expectAlertMessage(page, "Senha alterada com sucesso!");
-        await login.Logout();
+        await login.logout();
 
     },
     );
     await retryOnReload(page, async () => {
         await login.login(users.otherValidUser.email,'NovaSenha256');
-        await login.IsLoggedIn(users.otherValidUser.name);
+        await login.isLoggedIn(users.otherValidUser.name);
     },
     );
 
@@ -320,12 +321,12 @@ test('deve alterar a senha do usuário com sucesso', async ({ page }) => {
     await retryOnReload(page, async () => {
         await AlertHandler.expectAlertMessage(page, "Senha alterada com sucesso!");
         await page.waitForTimeout(6000);
-        await login.Logout();
+        await login.logout();
     },
     );
     await retryOnReload(page, async () => { 
         await login.login(users.otherValidUser.email,users.otherValidUser.password );
-        await login.IsLoggedIn(users.otherValidUser.name);
+        await login.isLoggedIn(users.otherValidUser.name);
     },
     );
 });

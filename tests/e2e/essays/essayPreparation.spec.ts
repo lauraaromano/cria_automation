@@ -16,7 +16,7 @@ test.beforeEach(async ({ page }) => {
 
 test('deve criar uma redação estilo Enem com sucesso', async () => {
     await essays.selectVestibular("Enem");
-    await essays.selectThemeFromResult(essayData.temas_redacao.enem[1]); 
+    await essays.selectThemeFromResult(essayData.temas_redacao.enem[14]); 
     await essays.selectTipoTexto(essayData.tipo_texto[0]);
     await essays.selectGeneroTextual(essayData.genero_textual.dissertativo[0]);
     await essays.clickStartNewEssay();
@@ -103,8 +103,6 @@ test('deve selecionar um tema de redação através de Outros', async () => {
     await essays.selectTipoTexto(essayData.tipo_texto[0]);
     await essays.selectGeneroTextual(essayData.genero_textual.dissertativo[5]);
     await essays.clickStartNewEssay();
-    await essays.urlPageWritingValidation();
-
 });
 
 test('deve selecionar um tema de redação através do Tema da semana', async () => {

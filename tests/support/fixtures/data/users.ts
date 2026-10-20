@@ -10,6 +10,11 @@ export const users = {
         email: process.env.TEST_USER_EMAIL2 as string,
         password: process.env.TEST_USER_PASSWORD2 as string,
     },
+    thirdValidUser: {
+        name: process.env.TEST_USER_NAME3 as string,
+        email: process.env.TEST_USER_EMAIL3 as string,
+        password: process.env.TEST_USER_PASSWORD3 as string,
+    },
 
     invalidEmail: {
         email: 'usuario.inexistente@teste.com',
